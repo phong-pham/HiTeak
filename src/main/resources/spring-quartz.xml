@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+    <!-- MongoDB Rebuild Job Detail. -->
+    <!--<bean id="quartzMongoRebuildJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="facilityInfoService"/>
+        <property name="targetMethod" value="buildMongoDB"/>
+    </bean>
+
+    &lt;!&ndash; Call Detail to QSI Patient Link Job Detail. &ndash;&gt;
+    <bean id="quartzCallLinkJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="callDetailService"/>
+        <property name="targetMethod" value="linkCallPatientsToQsiPatients"/>
+    </bean>
+
+    &lt;!&ndash; MongoDB Rebuild Cron Trigger &ndash;&gt;
+    <bean id="mongoCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="quartzMongoRebuildJob"/>
+        <property name="cronExpression" value="0 47 20 ? * *"/>
+    </bean>
+
+    &lt;!&ndash; Call Detail to QSI Link Cron Trigger. &ndash;&gt;
+    <bean id="callLinkCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="quartzCallLinkJob"/>
+        <property name="cronExpression" value="0 10 7,10,13,16,19 ? * *"/>
+    </bean>
+
+    <bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
+            <list>
+                <ref bean="quartzCallLinkJob"/>
+                <ref bean="quartzMongoRebuildJob"/>
+            </list>
+        </property>
+
+        &lt;!&ndash;<property name="triggers">
+            <list>
+                <ref bean="callLinkCronTrigger"/>
+                <ref bean="mongoCronTrigger"/>
+            </list>
+        </property>&ndash;&gt;
+    </bean>-->
+
+</beans>

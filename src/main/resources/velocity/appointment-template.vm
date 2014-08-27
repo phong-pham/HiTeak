@@ -1,0 +1,184 @@
+<html>
+<head>
+<title></title>
+</head>
+<body bgcolor="#123457">
+<table width="730" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr>
+		<td valign="top"><table width="730" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+				<td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="30" height="1" border="0"></td>
+				<td valign="top" bgcolor="#123457"><a href="$BrandName" target="_blank"><img style="display:block;" src="$AssetLocation/images/$BrandLogo" alt="Bright Now! Dental(R)" width="312" height="69" border="0"></a></td>
+				<td valign="bottom" bgcolor="#123457" align="right"><font style="font-family:arial,helvetica,sans-serif; font-size:16px;" face="Arial, Helvetica, sans-serif" size="3" color="#ffffff"><strong><font color="#33cc00">CALL TODAY</font> (800) 666-2724</strong><br>
+				  <img style="display:inline;" src="$AssetLocation/images/spacer.gif" alt="" width="358" height="15" border="0"></font></td>
+				<td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="30" height="1" border="0"></td>
+  			</tr>
+		</table><table border="0" width="730" cellspacing="0" cellpadding="0">
+			<tr>
+				<td bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="30" height="1" border="0"></td>
+				<td bgcolor="#123457"><img style="display:block;" border="0" src="$AssetLocation/images/spacer.gif" width="9" height="1" alt=""></td>
+				<td bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="652" height="1" border="0"></td>
+				<td bgcolor="#123457"><img style="display:block;" border="0" src="$AssetLocation/images/spacer.gif" width="9" height="1" alt=""></td>
+				<td bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="30" height="1" border="0"></td>
+			</tr>
+
+<!-- MAIN NAV START -->
+
+			<tr>
+				<td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="30" height="30" border="0"></td>
+				<td bgcolor="#46a6d9"><img style="display:block;" border="0" src="$AssetLocation/images/curve1.gif" width="9" height="30" alt=""></td>
+				<td bgcolor="#46a6d9" align="center"><font style="font-family:arial,helvetica,sans-serif; font-size:12px;" face="Arial, Helvetica, sans-serif" size="2" color="#216aae"><strong>&nbsp;&nbsp;&nbsp;<a href="$BrandName/your-first-visit" target="_blank" style="text-decoration:none;"><font color="#ffffff">YOUR FIRST VISIT</font></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="$BrandName/locations" target="_blank" style="text-decoration:none;"><font color="#ffffff">LOCATIONS</font></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="$BrandName/offers" target="_blank" style="text-decoration:none;"><font color="#ffffff">OFFERS</font></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="$BrandName/services" target="_blank" style="text-decoration:none;"><font color="#ffffff">SERVICES</font></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="$BrandName/about-us" target="_blank" style="text-decoration:none;"><font color="#ffffff"><nobr>ABOUT US</nobr></font></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="$BrandName/pressroom" target="_blank" style="text-decoration:none;"><font color="#ffffff">PRESS</font></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="$BrandName/blog" target="_blank" style="text-decoration:none;"><font color="#ffffff">BLOG</font></a>&nbsp;&nbsp;&nbsp;</strong></font></td>
+				<td bgcolor="#46a6d9"><img style="display:block;" border="0" src="$AssetLocation/images/curve2.gif" width="9" height="30" alt=""></td>
+				<td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="30" height="30" border="0"></td>
+			</tr>
+
+<!-- MAIN NAV END -->
+
+		</table>
+		<table border="0" width="730" cellspacing="0" cellpadding="0">
+		  <tr>
+		    <td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/banner_shim.gif" alt="" width="30" height="90" border="0"></td>
+		    <td valign="top" bgcolor="#ffffff"><img style="display:block;" border="0" src="$AssetLocation/images/banner-appt.gif" width="670" height="90" alt="Teeth Love Good News"></td>
+		    <td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="30" height="1" border="0"></td>
+	      </tr>
+		  <tr>
+		    <td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="30" height="90" border="0"></td>
+		    <td valign="top" bgcolor="#ffffff"><table border="0" width="670" cellspacing="0" cellpadding="0">
+		      <tr>
+		        <td><img src="$AssetLocation/images/couple-med.jpg" width="270" height="275"></td>
+		        <!-- BODY COPY AND MAIN PHOTO START -->
+		        <td valign="top"><p><font style="font-family:arial,helvetica,sans-serif; font-size:20px;" face="Arial, Helvetica, sans-serif" size="4" color="#00a4e4"><strong>Your appointment is scheduled for:</strong></font><font style="font-family:arial,helvetica,sans-serif; font-size:14px;" face="Arial, Helvetica, sans-serif" size="2" color="#000000"><br>
+		          &nbsp;<br>
+		          <strong>$AppointmentDateTime</strong></font>
+		          <p><font style="font-family:arial,helvetica,sans-serif; font-size:14px;" face="Arial, Helvetica, sans-serif" size="2" color="#000000"> $FacilityAddress <br> $FacilityCityStateZip </font><br>
+	              <font style="font-family:arial,helvetica,sans-serif; font-size:14px;" face="Arial, Helvetica, sans-serif" size="2" color="#000000">$FacilityPhone</font><br><br>
+	              <p><font style="font-family:arial,helvetica,sans-serif; font-size:14px;" face="Arial, Helvetica, sans-serif" size="2" color="#000000">We know your teeth are busy. So we're sending you this reminder to confirm your upcoming appointment. If you can't make it, just give us a call at <font style="font-family:arial,helvetica,sans-serif; font-size:14px;" face="Arial, Helvetica, sans-serif" size="2" color="#00a4e4">$FacilityPhone</font> and let us know when it's a good time to reschedule. </font><br>
+		              <br>
+                </p></td>
+		        <td valign="top"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="20" height="1" border="0"></td>
+		        <!-- BODY COPY AND MAIN PHOTO END -->
+	          </tr>
+		      </table>
+
+              <table border="0" width="670" cellspacing="0" cellpadding="0">
+		      <tr>
+		        <td><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="20" height="1" border="0"></td>
+		        <td valign="top"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="630" height="1" border="0"></td>
+		        <td valign="middle"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="20" height="1" border="0"></td>
+		        </tr>
+		      <tr>
+		        <td>&nbsp;</td>
+		        <!-- BODY COPY AND MAIN PHOTO START -->
+		        <td valign="top">
+                    <table width="630" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td width="630" colspan="3" align="left" scope="col"><font style="font-family:arial,helvetica,sans-serif; font-size:16px;" face="Arial, Helvetica, sans-serif" size="3" color="#00a4e4"><strong>Is it your first time to our office? You can save time by downloading and filling out your patient forms in advance.</strong></font></td>
+                    </tr>
+                    <tr>
+                      <th colspan="3" align="left" scope="col"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="630" height="20" border="0"></th>
+                    </tr>
+                    <tr>
+                      <td colspan="3" align="left" scope="col">
+                      <p><font style="font-family:arial,helvetica,sans-serif; font-style:normal; font-size:14px;" face="Arial, Helvetica, sans-serif" size="2" color="#000000">Simply complete the forms and print them out. Then bring them with you to your first visit. <br>
+See? Things are already easier.</font></p></td>
+                      </tr>
+                    <tr>
+                      <td colspan="3" align="left" scope="col"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="630" height="25" border="0"></td>
+                    </tr>
+                    <tr>
+                      <td align="left" scope="col"><font style="font-family:arial,helvetica,sans-serif; font-style:normal; font-size:14px;" face="Arial, Helvetica, sans-serif" size="2" color="#000000"><strong>Patient Information</strong></font></td>
+                      <td align="left" scope="col"><font style="font-family:arial,helvetica,sans-serif; font-style:normal; font-size:14px;" face="Arial, Helvetica, sans-serif" size="2" color="#000000"><strong>Informed Consent</strong></font></td>
+                      <td align="left" scope="col"><font style="font-family:arial,helvetica,sans-serif; font-style:normal; font-size:14px;" face="Arial, Helvetica, sans-serif" size="2" color="#000000"><strong>Notice of Privacy Policy</strong></font></td>
+                    </tr>
+                    <tr>
+                      <td align="left" scope="col"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="210" height="15" border="0"></td>
+                      <td align="left" scope="col"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="210" height="15" border="0"></td>
+                      <td align="left" scope="col"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="210" height="15" border="0"></td>
+                    </tr>
+                    <tr>
+                      <td align="left" scope="col"><p><font style="font-family:arial,helvetica,sans-serif; font-style:normal; font-size:12px;" face="Arial, Helvetica, sans-serif" size="2" color="#000000">
+                        <a href="$BrandName/sites/default/files/patient_forms/English_Patient_Information_0.pdf">Download English Version</a><br>
+                            <br>
+                        <a href="$BrandName/sites/default/files/patient_forms/Spanish_Patient_Information_Forms[1].pdf">Formulario de informaci&oacute;n del <br>paciente</a></font></p>
+                      </td>
+                      <td align="left" scope="col"><p><font style="font-family:arial,helvetica,sans-serif; font-style:normal; font-size:12px;" face="Arial, Helvetica, sans-serif" size="2" color="#000000">
+                        <a href="$BrandName/sites/default/files/patient_forms/BN-102-En-11-11.pdf">Download English Version</a><br>
+                            <br>
+                        <a href="$BrandName/sites/default/files/patient_forms/BN-102-Sp-11-11.pdf">Formulario de consentimiento <br>informado</a></font></p>
+                      </td>
+                      <td align="left" scope="col"><p><font style="font-family:arial,helvetica,sans-serif; font-style:normal; font-size:12px;" face="Arial, Helvetica, sans-serif" size="2" color="#000000">
+                        <a href="$BrandName/sites/default/files/patient_forms/HIPAA-BN-125-En-10-09.pdf">Download English Version</a><br>
+                            <br>
+                        <a href="$BrandName/sites/default/files/patient_forms/HIPAA-BN-125-SP-10-09.pdf">Formulario de Aviso de Pr&aacute;cticas <br>de Privacidad</a></font></p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+		        <td valign="middle">&nbsp;</td>
+		        <!-- BODY COPY AND MAIN PHOTO END -->
+	          </tr>
+		      </table>
+
+		      <table border="0" width="670" cellspacing="0" cellpadding="0">
+		        <tr>
+		          <td><p><img src="$AssetLocation/images/footer.gif" width="670" height="43"></td>
+		          <!-- BODY COPY AND MAIN PHOTO START -->
+		          <!-- BODY COPY AND MAIN PHOTO END -->
+	            </tr>
+	          </table></td>
+		    <td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="30" height="1" border="0"></td>
+	      </tr>
+		  </table>
+		<table border="0" width="730" cellspacing="0" cellpadding="0">
+	  <tr>
+				<td colspan="4" valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="730" height="20" border="0"></td>
+			</tr>
+			<tr>
+				<td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="50" height="1" border="0"></td>
+				<td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="375" height="1" border="0"></td>
+				<td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="263" height="1" border="0"></td>
+				<td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="42" height="1" border="0"></td>
+			</tr>
+			<tr>
+				<td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="50" height="1" border="0"></td>
+
+<!-- LEGAL START -->
+
+				<td valign="top" bgcolor="#123457"><p><font style="font-family:arial,helvetica,sans-serif; font-size:14px; line-height:13px;" face="Arial, Helvetica, sans-serif" size="2" color="#ffffff"><img style="display:inline;" src="images/spacer.gif" alt="" width="1" height="10" border="0"><br>
+          <strong><a style="color: #ffffff" href="$BrandName" target="_blank">$BrandNameLabel</a></strong><br>&nbsp;<br>
+				</font><font style="font-family:arial,helvetica,sans-serif; font-size:11px; line-height:13px;" face="Arial, Helvetica, sans-serif" size="2" color="#B2BFCC"><br>
+		        <br>
+		        &copy; 2012 Smile Brands Inc. All rights reserved.<br>
+		        &nbsp;<br>
+		        Corporate Office<br>
+		        8105 Irvine Center Drive, Suite 1500<br>
+		        Irvine, CA 92618<br>
+		        &nbsp;<br>
+		        <a href="$BrandName/privacy-policy"><font color="#B2BFCC">Privacy Policy</font></a> | <a href="$BrandName/terms-and-conditions"><font color="#B2BFCC">Terms and Conditions</font></a><br>
+		      &nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</font></p></td>
+
+<!-- LEGAL END -->
+
+				<td valign="top" bgcolor="#123457"><table border="0" width="263" cellspacing="0" cellpadding="0">
+				<tr>
+
+<!-- SOCIAL ICONS START -->
+
+				<td><img style="display:block;" border="0" src="$AssetLocation/images/social1.gif" width="146" height="34" alt="Stay Connected"></td>
+				<td><a href="http://www.facebook.com/$BrandNameSocial" target="_blank"><img style="display:block;" border="0" src="$AssetLocation/images/social2.gif" width="33" height="34" alt="Facebook"></a></td>
+				<td><img style="display:block;" border="0" src="$AssetLocation/images/social3.gif" width="10" height="34" alt=""></td>
+				<td><a href="http://twitter.com/$BrandNameSocial" target="_blank"><img style="display:block;" border="0" src="$AssetLocation/images/social4.gif" width="33" height="34" alt="Twitter"></a></td>
+				<td><img style="display:block;" border="0" src="$AssetLocation/images/social5.gif" width="10" height="34" alt=""></td>
+				<td><a href="$BrandName/blog" target="_blank"><img style="display:block;" border="0" src="$AssetLocation/images/social6.gif" width="33" height="34" alt=""></a></td>
+
+				<!-- SOCIAL ICONS END -->
+
+				</tr>
+				</table></td>
+				<td valign="top" bgcolor="#123457"><img style="display:block;" src="$AssetLocation/images/spacer.gif" alt="" width="42" height="1" border="0"></td>
+			</tr>
+		</table></td>
+    </tr>
+</table>
+</body>
+</html>

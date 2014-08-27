@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Call Center Datasource -->
+    <bean id="dataSource" destroy-method="close" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+        <property name="jdbcUrl">
+            <value>jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS=(PROTOCOL=TCP)(HOST=predatorvip)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=raptorvip)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=sbiprod_taf)))</value>
+        </property>
+        <property name="user" value="bndapp" />
+        <property name="password" value="bnd4pp" />
+    </bean>
+
+    <!-- **********  START  ::  CALL CENTER SUPPORT CONVERSION STATEMENTS  ********** -->
+    <bean id="CONVR_CALL_CENTER_LIST" class="java.lang.String">
+        <constructor-arg type="java.lang.String">
+            <value>
+                SELECT c.look_up_dnis, c.facility_id, fv.fac_attr_value, c.transfer_number,
+                c.call_center_supported, c.call_center, c.call_center_queue
+
+                FROM call_center_support c
+                LEFT OUTER JOIN facility f ON c.facility_id = f.facility_id
+                LEFT OUTER JOIN facility_attr_values fv ON fv.facility_id = c.facility_id AND fv.fac_attribute_id = 7
+
+                WHERE CALL_CENTER_QUEUE not like 'Marketing%'
+                AND CALL_CENTER_QUEUE not like '%Press_4'
+
+                ORDER BY c.facility_id
+            </value>
+        </constructor-arg>
+    </bean>
+    <bean id="CONVR_CAMPAIGN_LIMITED" class="java.lang.String">
+        <constructor-arg type="java.lang.String">
+            <value>
+                select c.CAMPAIGN_LOOK_UP_DNIS, c.CAMPAIGN_NAME, c.CALL_CENTER, c.LIMITED_SUPPORT,
+                    cf.FACILITY_ID, f.FACILITY_NAME,
+                    (ad.line_one || ' ' || ad.line_two) as ADDRESS,
+                    ad.city, ad.state, ad.zipcode
+
+                from CALL_CENTER_CAMPAIGN c
+
+                    left outer join CALL_CENTER_CAMPAIGN_FACILITY cf on c.CAMPAIGN_ID = cf.CAMPAIGN_ID
+                    left outer join FACILITY f on cf.FACILITY_ID = f.FACILITY_ID
+                    left outer join CALL_CENTER_SUPPORT cs on cf.FACILITY_ID = cs.FACILITY_ID
+                    left JOIN FACILITY_ADDRESS fa ON cs.FACILITY_ID = fa.FACILITY_ID AND fa.ADDRESS_TYPE = 'REAL' AND fa.UNLINK_DATETIME IS NULL
+                    left JOIN ADDRESS ad ON fa.ADDRESS_ID = ad.ADDRESS_ID
+
+                where LIMITED_SUPPORT = 'Y'
+                order by c.CAMPAIGN_ID
+            </value>
+        </constructor-arg>
+    </bean>
+    <bean id="CONVR_CAMPAIGN" class="java.lang.String">
+        <constructor-arg type="java.lang.String">
+            <value>
+                select c.CAMPAIGN_LOOK_UP_DNIS, c.CAMPAIGN_NAME, c.CALL_CENTER, c.LIMITED_SUPPORT
+
+                from CALL_CENTER_CAMPAIGN c
+                where LIMITED_SUPPORT = 'N'
+                order by c.CAMPAIGN_ID
+            </value>
+        </constructor-arg>
+    </bean>
+
+
+    <!-- **********  END  ::  CALL CENTER SUPPORT CONVERSION STATEMENTS  ********** -->
+
+</beans>

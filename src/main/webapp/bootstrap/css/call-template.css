@@ -1,0 +1,155 @@
+body {
+  padding-top: 10px;
+  font-size: 13px;
+}
+.starter-template {
+  padding: 15px 15px;
+  text-align: center;
+}
+a {
+    color: #257db0;
+    text-decoration: none;
+}
+.alert {
+    padding: 5px 5px 5px 15px;
+}
+.ctl-btn {
+    float: right;
+    padding-right: 20px;
+}
+.row {
+    margin-bottom: 3px;
+}
+.action {
+    font-size: 1.1em;
+}
+.gray {
+    color: #676767;
+}
+.blue {
+    color: #257db0;
+}
+.top {
+    margin-top: 0px !important;
+}
+.bold {
+    font-weight: bold;
+}
+.row h3 {
+    color: #676767;
+}
+.row h4 {
+    color: #676767;
+}
+.bs-callout {
+    padding: 20px 30px 20px 30px;
+    margin: 20px 0;
+    border: 1px solid;
+    border-left-width: 7px;
+    border-radius: 5px;
+}
+.bs-callout h3 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.bs-callout-en {
+    border-left-color: #298cc5 !important;
+    border-color: #298cc5;
+}
+.bs-callout-en h2 {
+    color: #257db0;
+    margin-top: 0px !important;
+}
+.bs-callout-sp {
+    border-left-color: #31b0d6 !important;
+    border-color: #31b0d6;
+}
+.bs-callout-sp h2 {
+    color: #28a1c6;
+    margin-top: 0px !important;
+}
+
+.clear {
+	clear: both;
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+
+span.title {
+	color: #165b9c;
+	font-weight: bold;
+}
+
+span.content {
+	display: block;
+    width: 450px;
+}
+
+.padding-10 {
+    padding: 10px;
+}
+.padding-left-10 {
+    padding-left: 10px;
+}
+.padding-left-5 {
+    padding-left: 5px;
+}
+.modal-header.error {
+    color: #a94442;
+    border-color: #a94442;
+    background-color: #f2dede;
+}
+.modal-header.warning {
+    color: #8a6d3b;
+    border-color: #8a6d3b;
+    background-color: #fcf8e3;
+}
+.modal-header.success {
+    color: #3c763d;
+    border-color: #3c763d;
+    background-color: #dff0d8;
+}
+.modal-header.message {
+    color: #ffffff;
+    background-color: #428bca;
+    border-color: #428bca;
+}
+.patient-info-form.verified {
+    color: #3c763d;
+    background-color: #dff0d8;
+    padding: 15px;
+}
+.patient-info-form.unverified {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    padding: 15px;
+}
+.pointer {
+    cursor: pointer;
+}
+.line-report-detail .popover {
+    width: 460px;
+    max-width: 800px;
+}
+.width-400 {
+    width: 400px;
+}
+.width-300 {
+    width: 300px;
+}
+.width-250 {
+    width: 250px;
+}
+.width-220 {
+    width: 220px;
+}
+.width-200 {
+    width: 200px;
+}
+.text-align-right {
+    text-align: right;
+}

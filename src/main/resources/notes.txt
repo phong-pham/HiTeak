@@ -1,0 +1,72 @@
+1.  Inbound Call will produce a UUID that will not change when transferred between agents.
+    a.  Need to track transfer events by UUID
+    b.  Need to record multiple agents on an AgentCall record to support transfer.
+
+2.  InboundCall record will need to generate a URL for the IVR from a service call.
+    a.  IVR will provide the UUID and PSR Agent ID
+
+3.  Register when the Screen Pop occurs.
+    a.  IVR will provide UUID, URL and PSR Agent ID
+
+4.  Need the ability to capture a CSR URL similar to know the UUID and Agent ID
+    a.  This process will ignore the targetFacilityID and pop the CSR tools page.
+
+5.  Register when the CSR screen pop occurs.
+
+6.  Provide a service to check if a patient is existing by ANI and return if Matched (boolean) & Phone Number record which will include which Facility ID.
+
+7.  Build a CSR screen pop page with tools to support the process.
+    a.  Zip Code to Facility ID.
+
+QUESTIONS:
+
+1. If there are more than 1 patient returned from searching appointment by phone number, what should we do? Ignore patient information?
+
+
+
+
+PHONE NUMBER CONFIGURATION
+1.  Marketing Toll Free lines are not needed.  Remove from Mongo
+2.  Not a Press_# is a Main Line (ML).
+3.  Remove IRV_Press_4 & PLA_Press_4.
+
+
+
+
+TTS ELEMENTS
+
+Add a TTS Text String for Phone and Patient.
+
+"Thank You, we have found an appointment for first name last name at Day Month Date at Hour Minute located at Facility Name, Address."
+"We have a patient record for First Name Last associated with your phone number.  If this is correct, please press 1, else press 2."
+"We are not able to find a patient record associated with the phone number you've provided."
+
+"Facility Name, Address, Plaza, Hours."
+
+
+
+HIGH LEVEL CALL FLOW
+
+800# Call
+
+1.  Register Call by DNIS and return an Inbound Call record with the IC with Phone Number (Call Center & Queue) & UUID.
+2.  IVR registers events using UUID.
+3.  When a routing button is pressed, IVR calls either PSR or CSR URL generation service and provides (UUID, Agent, Language, Number Press).
+4.  IVR registers the result of the URL with UUID, Agent & Boolean connected.
+
+Facility # Call
+
+1.  Same as above but the Phone Number record will have a Facility and transfer number.
+2.  If not supported, call is transferred to Facility and IVR registers transfer event.
+3.  If supported and button press is Call Center request, steps 3 & 4 above are followed.
+
+
+
+PHONE TYPE OPTIONS
+
+ML - Main Line
+BL - Back Line
+FX - Fax Line
+TF - Toll Free 800#
+CP - Campaign
+
