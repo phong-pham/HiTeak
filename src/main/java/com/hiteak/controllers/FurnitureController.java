@@ -25,14 +25,14 @@ public class FurnitureController {
         Category outdoorChair = new Category(1, "Chairs", "furniture/images/cat_1.jpg", 0);
 
         Category reclining = new Category(11, "Reclining", "furniture/images/outdoor/chair/out_rec_1.jpg", 1);
-        reclining.getProducts().add(new Product("5 Position Chair", "HLAC275", "", "furniture/images/outdoor/chairs/out_rec_1.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product("5 Position Chair", "HLAC669", "", "furniture/images/outdoor/chairs/out_rec_2.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product("5 Position Chair", "HLAC173", "", "furniture/images/outdoor/chairs/out_rec_3.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product("5 Position Chair", "HLAC248", "", "furniture/images/outdoor/chairs/out_rec_4.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product("5 Position Chair", "HLAC298", "", "furniture/images/outdoor/chairs/out_rec_5.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product("5 Position Chair", "HLAC363", "", "furniture/images/outdoor/chairs/out_rec_6.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product("5 Position Chair", "HLAC388", "", "furniture/images/outdoor/chairs/out_rec_7.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product("Westimster 5 Position Chair", "HLAC393", "", "furniture/images/outdoor/chairs/out_rec_8.jpg", 100d, 50d));
+        reclining.getProducts().add(new Product(1, "5 Position Chair", "HLAC275", "", "furniture/images/outdoor/chairs/out_rec_1.jpg", 100d, 50d));
+        reclining.getProducts().add(new Product(2, "5 Position Chair", "HLAC669", "", "furniture/images/outdoor/chairs/out_rec_2.jpg", 100d, 50d));
+        reclining.getProducts().add(new Product(3, "5 Position Chair", "HLAC173", "", "furniture/images/outdoor/chairs/out_rec_3.jpg", 100d, 50d));
+        reclining.getProducts().add(new Product(4, "5 Position Chair", "HLAC248", "", "furniture/images/outdoor/chairs/out_rec_4.jpg", 100d, 50d));
+        reclining.getProducts().add(new Product(5, "5 Position Chair", "HLAC298", "", "furniture/images/outdoor/chairs/out_rec_5.jpg", 100d, 50d));
+        reclining.getProducts().add(new Product(6, "5 Position Chair", "HLAC363", "", "furniture/images/outdoor/chairs/out_rec_6.jpg", 100d, 50d));
+        reclining.getProducts().add(new Product(7, "5 Position Chair", "HLAC388", "", "furniture/images/outdoor/chairs/out_rec_7.jpg", 100d, 50d));
+        reclining.getProducts().add(new Product(8, "Westimster 5 Position Chair", "HLAC393", "", "furniture/images/outdoor/chairs/out_rec_8.jpg", 100d, 50d));
 //        outdoorChair.getSubCategories().add(reclining);
         categories.add(reclining);
 
@@ -106,7 +106,7 @@ public class FurnitureController {
             prefixImg = "home";
             List<Category> categoryList = new ArrayList<Category>();
             for(Category category : categories){
-                System.out.println(category.getCategoryName() + ":::" + category.getSubCategories().size());
+//                System.out.println(category.getCategoryName() + ":::" + category.getSubCategories().size());
                 if(category.getCategoryId() == category.getParentCategoryId()){
                     categoryList.add(category);
                     category.setSubCategories(findSubCategories(category.getCategoryId()));
@@ -118,11 +118,15 @@ public class FurnitureController {
             result = path;
             if(path.equalsIgnoreCase("productList") && categoryId != null){
                 Category category = generateProductCategory(categoryId);
-                System.out.println(category.getCategoryName() + ":::" + category.getSubCategories());
+//                System.out.println(category.getCategoryName() + ":::" + category.getSubCategories());
                 modelMap.addAttribute("category", category);
                 modelMap.addAttribute("hasSubCategory", category.getSubCategories().size() > 0);
                 modelMap.addAttribute("hasProductList", hasProductList(category));
                 modelMap.addAttribute("showPrice", false);
+                List<Category> breadcrumbs = buildBreadcrumb(category);
+//                System.out.println("breadcrumn: " + breadcrumbs);
+                modelMap.addAttribute("breadcrumb", breadcrumbs);
+                modelMap.addAttribute("hasBreadcrumb", breadcrumbs.size() > 0);
             }
         }
         for(int i=0; i<5; i++){
@@ -141,10 +145,10 @@ public class FurnitureController {
                 && parentCategory != null){
                 result.setCategoryDescription(parentCategory.getCategoryDescription());
             }
-            result.setSubCategories(findSubCategories(categoryId));
-            for(Category sub : result.getSubCategories()){
-                System.out.println(sub.getCategoryName());
+            if(parentCategory != null){
+                result.setParentCategoryName(parentCategory.getCategoryName());
             }
+            result.setSubCategories(findSubCategories(categoryId));
         }
         return result;
     }
@@ -153,7 +157,7 @@ public class FurnitureController {
         Category result = null;
         for(Category category : categoryList){
             if(category.getCategoryId() == categoryId){
-                result = category;
+                result = category.copy();
                 break;
             }
             result = findCategory(categoryId, category.getSubCategories());
@@ -186,5 +190,29 @@ public class FurnitureController {
             }
         }
         return hasProductList;
+    }
+
+    public List<Category> buildBreadcrumb(Category category){
+        List<Category> result = new ArrayList<Category>();
+        if(category != null){
+            List<Category> tempList = new ArrayList<Category>();
+            tempList.add(category);
+            Category temp = category;
+            while(temp.getCategoryId() != temp.getParentCategoryId()){
+                temp = findCategory(temp.getParentCategoryId(), categories);
+                if(temp != null){
+                    tempList.add(temp);
+                }
+            }
+            for(int i=tempList.size()-1; i>=0; i--){
+                if(i == (tempList.size() - 1)){
+                    category.setParentCategoryName(tempList.get(i).getCategoryName());
+                    category.setParentCategoryId(tempList.get(i).getCategoryId());
+                }else{
+                    result.add(tempList.get(i));
+                }
+            }
+        }
+        return result;
     }
 }

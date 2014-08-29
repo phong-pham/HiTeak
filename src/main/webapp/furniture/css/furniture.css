@@ -1,12 +1,18 @@
 .pointer {
     cursor: pointer;
 }
-.main-menu a{
+a{
     color: #000;
-    font-size: 20px;
 }
-.main-menu a.menu-item:hover{
+a.menu-item:hover{
     color: #b0ce24;
+}
+a.hiteak-breadcrumb{
+    color: #853036;
+    cursor: pointer;
+}
+.main-menu a.menu-item{
+    font-size: 20px;
 }
 ul.sub-menu {
     display: hidden;
@@ -109,10 +115,10 @@ table {
 
 tr td.product-td-item .product_info {
     position: absolute;
-    /*background: black;
-    background: rgba(85, 85, 85, 0.85) !important;*/
-    background: green;
-    background: rgba(195, 248, 197, 0.85) !important;
+    background: black;
+    background: rgba(85, 85, 85, 0.85) !important;
+    /*background: green;
+    background: rgba(195, 248, 197, 0.85) !important;*/
     color: white;
     padding: 0% 10%;
     width:98%;

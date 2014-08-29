@@ -16,7 +16,19 @@
         <jsp:include page="header.jsp"/>
         <hr class="separator-10"/>
         <div class="row">
-            <h2><strong>${category.categoryName}</strong></h2>
+            <h2><a class="menu-item" href="productList?categoryId=${category.parentCategoryId}"><strong>${category.parentCategoryName}</strong></a></h2>
+            <c:if test="${hasBreadcrumb}">
+                <h3 style="color: #853036;">
+                    <span>.:</span>
+                    <c:set var="i" value="0"/>
+                    <c:forEach var="crumb" items="${breadcrumb}">
+                        <c:if test="${i==0}"><a class="menu-item hiteak-breadcrumb" href="productList?categoryId=${crumb.categoryId}">${crumb.categoryName}</a></c:if>
+                        <c:if test="${i>0}">:: <a class="menu-item hiteak-breadcrumb" href="productList?categoryId=${crumb.categoryId}">${crumb.categoryName}</a> </c:if>
+                        <c:set var="i" value="${i+1}"/>
+                     </c:forEach>
+                    <span>:.</span>
+                </h3>
+            </c:if>
             <p>${category.categoryDescription}</p>
         </div>
         <c:set var="i" value="0"/>
@@ -48,16 +60,18 @@
                 </table>
             </c:when>
             <c:when test="${hasProductList == true && hasSubCategory == false}">
-                <table>
+                <table style="width: 80%">
                 <c:forEach var="product" items="${category.products}">
-                    <c:if test="${i%4 == 0}">
+                    <c:if test="${i%5 == 0}">
                         <tr>
                     </c:if>
                     <td class="product-td-item">
                         <a href="productList?productId=${product.productId}" class="product-td-item">
                             <br/>
                             <img class="product-td-item" src="${pageContext.request.contextPath}/${product.imageSource}" alt="Outdoor Dining Chairs"/>
-                            <div class="product_info"><h3>${product.productName}</h3>
+                            <div class="product_info">
+                                <h3>${product.productName}</h3>
+                                <span>${product.productCode}</span>
                                 <c:if test="${showPrice == true}">
                                     <div>Retails for:
                                         <span><span class="amount">$2,095.00</span></span>
@@ -67,7 +81,7 @@
                             </div>
                         </a>
                     </td>
-                    <c:if test="${i%4 == 3}">
+                    <c:if test="${i%5 == 4}">
                         </tr>
                     </c:if>
                     <c:set var="i" value="${i+1}"/>
@@ -76,7 +90,7 @@
             </c:when>
             <c:when test="${hasSubCategory == true && hasProductList == true}">
                 <c:forEach var="subCategory" items="${category.subCategories}">
-                    <h3>${subCategory.categoryName}</h3>
+                    <h3><a class="menu-item" href="productList?categoryId=${subCategory.categoryId}">${subCategory.categoryName}</a></h3>
                     <hr/>
                     <table style="width: 80%">
                     <c:set var="i" value="0"/>
@@ -88,7 +102,9 @@
                             <a href="productList?productId=${product.productId}" class="product-td-item">
                                 <br/>
                                 <img class="product-td-item" src="${pageContext.request.contextPath}/${product.imageSource}" alt="Outdoor Dining Chairs"/>
-                                <div class="product_info"><h3>${product.productName}</h3>
+                                <div class="product_info">
+                                    <h3>${product.productName}</h3>
+                                    <span>${product.productCode}</span>
                                     <c:if test="${showPrice == true}">
                                         <div>Retails for:
                                             <span><span class="amount">$2,095.00</span></span>
@@ -98,10 +114,10 @@
                                 </div>
                             </a>
                         </td>
-                        <c:if test="${i%4 == 3}">
+                        <c:set var="i" value="${i+1}"/>
+                        <c:if test="${i%4 == 0}">
                             </tr>
                         </c:if>
-                        <c:set var="i" value="${i+1}"/>
                     </c:forEach>
                     </table>
                 </c:forEach>

@@ -12,13 +12,6 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            <!--classpath:spring-datasource.xml,-->
-            <!--classpath:spring-mongo.xml,-->
-            <!--classpath:spring-services.xml,-->
-            <!--classpath:spring-quartz.xml,-->
-            <!--classpath:spring-jdbc.xml,-->
-            <!--classpath:spring-jpa.xml,-->
-            <!--classpath:com/smilebrands/security/applicationContext-security.xml-->
         </param-value>
     </context-param>
     <!-- initialization of the IoC container -->

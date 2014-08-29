@@ -6,12 +6,13 @@ import java.util.List;
 /**
  * Created by phongpham on 8/24/14.
  */
-public class Category {
+public class Category implements Cloneable{
 
     private Integer categoryId;
     private String categoryName;
     private String categoryDescription;
     private Integer parentCategoryId;
+    private String parentCategoryName;
     private String imageSource;
     private List<Category> subCategories = new ArrayList<Category>();
     private List<Product> products = new ArrayList<Product>();
@@ -48,6 +49,14 @@ public class Category {
 
     public void setParentCategoryId(Integer parentCategoryId) {
         this.parentCategoryId = parentCategoryId;
+    }
+
+    public String getParentCategoryName() {
+        return parentCategoryName;
+    }
+
+    public void setParentCategoryName(String parentCategoryName) {
+        this.parentCategoryName = parentCategoryName;
     }
 
     public String getCategoryName() {
@@ -88,5 +97,18 @@ public class Category {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public Category copy(){
+        Category result = null;
+        try{
+             result = (Category)this.clone();
+        }catch (CloneNotSupportedException ex){
+            result = new Category(this.categoryId, this.categoryName, this.imageSource, this.parentCategoryId);
+            result.getSubCategories().addAll(this.getSubCategories());
+            result.getProducts().addAll(this.getProducts());
+        }
+        return result;
+
     }
 }
