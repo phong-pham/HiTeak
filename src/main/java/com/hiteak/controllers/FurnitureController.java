@@ -2,6 +2,9 @@ package com.hiteak.controllers;
 
 import com.hiteak.domain.Category;
 import com.hiteak.domain.Product;
+import com.hiteak.repo.CustomerServiceRepository;
+import com.hiteak.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,115 +21,43 @@ import java.util.List;
 @Controller
 public class FurnitureController {
 
-    private static final List<Category> categories = new ArrayList<Category>();
+    @Autowired
+    private CategoryService categoryService;
 
-    static {
-        List<Category> outdoorCategories = new ArrayList<Category>();
-        Category outdoorChair = new Category(1, "Chairs", "furniture/images/cat_1.jpg", 0);
-
-        Category reclining = new Category(11, "Reclining", "furniture/images/outdoor/chair/out_rec_1.jpg", 1);
-        reclining.getProducts().add(new Product(1, "5 Position Chair", "HLAC275", "", "furniture/images/outdoor/chairs/out_rec_1.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(2, "5 Position Chair", "HLAC669", "", "furniture/images/outdoor/chairs/out_rec_2.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(3, "5 Position Chair", "HLAC173", "", "furniture/images/outdoor/chairs/out_rec_3.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(4, "5 Position Chair", "HLAC248", "", "furniture/images/outdoor/chairs/out_rec_4.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(5, "5 Position Chair", "HLAC298", "", "furniture/images/outdoor/chairs/out_rec_5.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(6, "5 Position Chair", "HLAC363", "", "furniture/images/outdoor/chairs/out_rec_6.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(7, "5 Position Chair", "HLAC388", "", "furniture/images/outdoor/chairs/out_rec_7.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(8, "Westimster 5 Position Chair", "HLAC393", "", "furniture/images/outdoor/chairs/out_rec_8.jpg", 100d, 50d));
-//        outdoorChair.getSubCategories().add(reclining);
-        categories.add(reclining);
-
-        Category folding = new Category(12, "Folding", "furniture/images/outdoor/chair/out_folding_1.jpg", 1);
-//        outdoorChair.getSubCategories().add(folding);
-        categories.add(folding);
-
-        Category stacking = new Category(13, "Stacking", "furniture/images/outdoor/chair/out_stacking_1.jpg", 1);
-//        outdoorChair.getSubCategories().add(stacking);
-        categories.add(stacking);
-
-        Category oneSeater = new Category(14, "One Seater", "furniture/images/outdoor/chair/out_oseater_1.jpg", 1);
-//        outdoorChair.getSubCategories().add(oneSeater);
-        categories.add(oneSeater);
-        outdoorCategories.add(outdoorChair);
-        categories.add(outdoorChair);
-
-        Category outdoorBench = new Category(2, "Benches", "furniture/images/cat_2.jpg", 0);
-        outdoorCategories.add(outdoorBench);
-        categories.add(outdoorBench);
-
-        Category outdoorTable = new Category(3, "Tables", "furniture/images/cat_3.jpg", 0);
-        outdoorCategories.add(outdoorTable);
-        categories.add(outdoorTable);
-
-        Category outdoorLounger = new Category(4, "Loungers", "furniture/images/cat_4.jpg", 0);
-        outdoorCategories.add(outdoorLounger);
-        categories.add(outdoorLounger);
-
-        Category outdoorSet = new Category(5, "Sets", "furniture/images/cat_5.jpg", 0);
-        outdoorCategories.add(outdoorSet);
-        categories.add(outdoorSet);
-
-        Category outdoorCategory = new Category(0, "Outdoor Products", outdoorCategories, 0);
-        outdoorCategory.setCategoryDescription("HL Distribution, Inc. produces tables, chairs, sunloungers, trolleys... for garden, swimming pool, bathroom, tourist boat with teak wood. This kind of wood contains high natural teak oil; protect the furniture from wood-worm eating and severe weather conditions. We also combine teak wood with other material such as stainless steel, aluminum, iron, textilene... to diversify our products.");
-        categories.add(outdoorCategory);
-
-        List<Category> indoorCategories = new ArrayList<Category>();
-
-        Category indoorChair = new Category(7, "Chairs", "furniture/images/cat_6.jpg", 6);
-        indoorCategories.add(indoorChair);
-        categories.add(indoorChair);
-
-        Category indoorTable = new Category(8, "Tables", "furniture/images/cat_7.jpg", 6);
-        indoorCategories.add(indoorTable);
-        categories.add(indoorTable);
-
-        Category indoorBedroom = new Category(9, "Bedroom Sets", "furniture/images/cat_8.jpg", 6);
-        indoorCategories.add(indoorBedroom);
-        categories.add(indoorBedroom);
-
-        Category indoorDining = new Category(10, "Dining Sets", "furniture/images/cat_9.jpg", 6);
-        indoorCategories.add(indoorDining);
-        categories.add(indoorDining);
-
-        Category indoorCategory = new Category(6, "Indoor Products", indoorCategories, 6);
-        indoorCategory.setCategoryDescription("We produce indoor furniture for bedroom, dining room, bathroom, kitchen cabinet, door,... with beech wood imported from Europe. This kind of wood has bright color and stable for using. Our designers create many different ranges of products: classic, modern or combine both to meet all demands of customers.");
-        categories.add(indoorCategory);
-    }
+    @Autowired
+    private CustomerServiceRepository customerServiceRepository;
 
     @RequestMapping(value = "{path}", method = RequestMethod.GET)
     public String getHomePage(ModelMap modelMap, @PathVariable String path,
                               @RequestParam(required = false) Integer categoryId){
         int carouselHeight = 200;
-        String prefixImg = "";
+        String prefixImg = "banner";
         List<String> carouselImages = new ArrayList<String>();
 
-        String result = "home";
+        String result = path;
         if(path.equalsIgnoreCase("home")){
             carouselHeight = 500;
             prefixImg = "home";
-            List<Category> categoryList = new ArrayList<Category>();
-            for(Category category : categories){
-//                System.out.println(category.getCategoryName() + ":::" + category.getSubCategories().size());
-                if(category.getCategoryId() == category.getParentCategoryId()){
-                    categoryList.add(category);
-                    category.setSubCategories(findSubCategories(category.getCategoryId()));
-                }
-            }
+            List<Category> categoryList = categoryService.getCategoriesById(-1, true, false, true);
+            System.out.println(categoryList.size());
             modelMap.addAttribute("categories", categoryList);
+        }else if(path.equalsIgnoreCase("customerService")){
+            modelMap.addAttribute("howTos", customerServiceRepository.getCustomerService(false));
+            modelMap.addAttribute("faqs", customerServiceRepository.getCustomerService(true));
         }else{
-            prefixImg = "banner";
-            result = path;
             if(path.equalsIgnoreCase("productList") && categoryId != null){
-                Category category = generateProductCategory(categoryId);
-//                System.out.println(category.getCategoryName() + ":::" + category.getSubCategories());
-                modelMap.addAttribute("category", category);
-                modelMap.addAttribute("hasSubCategory", category.getSubCategories().size() > 0);
-                modelMap.addAttribute("hasProductList", hasProductList(category));
-                modelMap.addAttribute("showPrice", false);
-                List<Category> breadcrumbs = buildBreadcrumb(category);
-//                System.out.println("breadcrumn: " + breadcrumbs);
-                modelMap.addAttribute("breadcrumb", breadcrumbs);
-                modelMap.addAttribute("hasBreadcrumb", breadcrumbs.size() > 0);
+                List<Category> categoryList = categoryService.getCategoriesById(categoryId, true, true, false);
+                if(categoryList.size() > 0){
+                    Category category = categoryList.get(0);
+                    modelMap.addAttribute("category", category);
+                    modelMap.addAttribute("hasSubCategory", category.getSubCategories().size() > 0);
+                    modelMap.addAttribute("hasProductList", hasProductList(category));
+                    modelMap.addAttribute("showPrice", false);
+                    List<Category> breadcrumbs = categoryService.buildBreadCrumb(category);
+                    modelMap.addAttribute("breadcrumb", breadcrumbs);
+                    modelMap.addAttribute("hasBreadcrumb", breadcrumbs.size() > 0);
+                }
+
             }
         }
         for(int i=0; i<5; i++){
@@ -134,23 +65,33 @@ public class FurnitureController {
         }
         modelMap.addAttribute("carouselHeight", carouselHeight);
         modelMap.addAttribute("carouselImages", carouselImages);
+        List<Category> temp = categoryService.getCategoriesById(-1, true, false, true);
+        List<Category> categoriesForMenu = new ArrayList<Category>();
+        for(Category category : temp){
+            for(Category subCategory : category.getSubCategories()){
+                List<Category> menuCategory = categoryService.getCategoriesById(subCategory.getCategoryId(), true, false, false);
+                categoriesForMenu.addAll(menuCategory);
+            }
+        }
+        modelMap.addAttribute("categoriesForMenu", categoriesForMenu);
         return "furniture/" + result;
     }
 
     public Category generateProductCategory(Integer categoryId){
-        Category result = findCategory(categoryId, categories);
-        if(result != null){
-            Category parentCategory = findCategory(result.getParentCategoryId(), categories);
-            if((result.getCategoryDescription() == null || result.getCategoryDescription().trim().length() == 0)
-                && parentCategory != null){
-                result.setCategoryDescription(parentCategory.getCategoryDescription());
-            }
-            if(parentCategory != null){
-                result.setParentCategoryName(parentCategory.getCategoryName());
-            }
-            result.setSubCategories(findSubCategories(categoryId));
-        }
-        return result;
+//        Category result = findCategory(categoryId, categories);
+//        if(result != null){
+//            Category parentCategory = findCategory(result.getParentCategoryId(), categories);
+//            if((result.getCategoryDescription() == null || result.getCategoryDescription().trim().length() == 0)
+//                && parentCategory != null){
+//                result.setCategoryDescription(parentCategory.getCategoryDescription());
+//            }
+//            if(parentCategory != null){
+//                result.setParentCategoryName(parentCategory.getCategoryName());
+//            }
+//            result.setSubCategories(findSubCategories(categoryId));
+//        }
+//        return result;
+        return null;
     }
 
     public Category findCategory(Integer categoryId, List<Category> categoryList){
@@ -169,14 +110,14 @@ public class FurnitureController {
     }
 
     public List<Category> findSubCategories(Integer categoryId){
-        List<Category> subCategories = new ArrayList<Category>();
-        for(Category category : categories){
-            if(category.getParentCategoryId() == categoryId && category.getCategoryId() != categoryId){
-                subCategories.add(category);
-//                subCategories.addAll(category.getSubCategories());
-            }
-        }
-        return  subCategories;
+//        List<Category> subCategories = new ArrayList<Category>();
+//        for(Category category : categories){
+//            if(category.getParentCategoryId() == categoryId && category.getCategoryId() != categoryId){
+//                subCategories.add(category);
+//            }
+//        }
+//        return  subCategories;
+        return null;
     }
 
     public boolean hasProductList(Category category){
@@ -193,26 +134,27 @@ public class FurnitureController {
     }
 
     public List<Category> buildBreadcrumb(Category category){
-        List<Category> result = new ArrayList<Category>();
-        if(category != null){
-            List<Category> tempList = new ArrayList<Category>();
-            tempList.add(category);
-            Category temp = category;
-            while(temp.getCategoryId() != temp.getParentCategoryId()){
-                temp = findCategory(temp.getParentCategoryId(), categories);
-                if(temp != null){
-                    tempList.add(temp);
-                }
-            }
-            for(int i=tempList.size()-1; i>=0; i--){
-                if(i == (tempList.size() - 1)){
-                    category.setParentCategoryName(tempList.get(i).getCategoryName());
-                    category.setParentCategoryId(tempList.get(i).getCategoryId());
-                }else{
-                    result.add(tempList.get(i));
-                }
-            }
-        }
-        return result;
+//        List<Category> result = new ArrayList<Category>();
+//        if(category != null){
+//            List<Category> tempList = new ArrayList<Category>();
+//            tempList.add(category);
+//            Category temp = category;
+//            while(temp.getCategoryId() != temp.getParentCategoryId()){
+//                temp = findCategory(temp.getParentCategoryId(), categories);
+//                if(temp != null){
+//                    tempList.add(temp);
+//                }
+//            }
+//            for(int i=tempList.size()-1; i>=0; i--){
+//                if(i == (tempList.size() - 1)){
+//                    category.setParentCategoryName(tempList.get(i).getCategoryName());
+//                    category.setParentCategoryId(tempList.get(i).getCategoryId());
+//                }else{
+//                    result.add(tempList.get(i));
+//                }
+//            }
+//        }
+//        return result;
+        return null;
     }
 }

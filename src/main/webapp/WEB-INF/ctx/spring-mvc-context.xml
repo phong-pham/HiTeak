@@ -30,7 +30,7 @@
     <mvc:view-controller path="/403" view-name="403"/>
 
     <!-- Web Controllers -->
-    <beans:bean class="com.hiteak.controllers.FurnitureController"/>
+    <context:component-scan base-package="com.hiteak.controllers"/>
 
     <!-- Used by @Async annotations in the schedule event aspect. -->
     <!--<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>-->

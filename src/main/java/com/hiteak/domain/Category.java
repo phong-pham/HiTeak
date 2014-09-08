@@ -1,13 +1,20 @@
 package com.hiteak.domain;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by phongpham on 8/24/14.
  */
+@Document
 public class Category implements Cloneable{
 
+    @Id
     private Integer categoryId;
     private String categoryName;
     private String categoryDescription;
@@ -110,5 +117,11 @@ public class Category implements Cloneable{
         }
         return result;
 
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

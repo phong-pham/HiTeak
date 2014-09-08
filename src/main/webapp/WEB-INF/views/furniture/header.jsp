@@ -12,27 +12,33 @@
                 <span class="input-group-addon glyphicon glyphicon-search"/>
             </div>
             <strong class="navbar-brand pull-right">Call Us Today
-                <span style="color: #B0CE25; font-size: 20px; padding-left: 10px; cursor: pointer;">(+1) 714-998-0088</span>
+                <a style="color: #B0CE25; font-size: 20px; padding-left: 10px; cursor: pointer;" href="tel:+17149980088">(+1) 714-998-0088</a>
             </strong>
         </div>
     </div>
     <hr/>
     <div class="row">
         <ul class="col-md-12 list-inline pointer main-menu">
+            <c:forEach var="category" items="${categoriesForMenu}">
+                <li>
+                    <a class="menu-item pointer" href="productList?categoryId=${category.categoryId}">${category.categoryName}</a>
+                    <ul class="sub-menu">
+                        <c:forEach var="subCategory" items="${category.subCategories}">
+                            <li><a class="menu-item" href="productList?categoryId=${subCategory.categoryId}">${subCategory.categoryName}</a></li>
+                        </c:forEach>
+                    </ul>
+                </li>
+            </c:forEach>
             <li>
-                <a class="menu-item pointer" href="about">About Us</a>
-            </li>
-            <li>
-                <a class="menu-item pointer">Products</a>
+                <a class="menu-item pointer" href="about">About</a>
                 <ul class="sub-menu">
-                    <li><a class="menu-item" href="productList?categoryId=0">Outdoor</a></li>
-                    <li><a class="menu-item" href="productList?categoryId=6">Indoor</a></li>
+                    <li><a class="menu-item" href="/about">About Us</a></li>
+                    <li><a class="menu-item" href="/aboutTeak">About Our Teak</a></li>
+                    <li><a class="menu-item" href="/customerService">Customer Service</a></li>
+                    <li><a class="menu-item">Request Catalogue</a></li>
+                    <li><a class="menu-item">Customer Review</a></li>
                 </ul>
             </li>
-            <li><a class="menu-item pointer">Customer Review</a></li>
-            <li><a class="menu-item pointer">Customer Service</a></li>
-            <li><a class="menu-item pointer">Request Catalogue</a></li>
-            <li><a class="menu-item pointer">About Our Teak</a></li>
         </ul>
     </div>
     <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: ${carouselHeight}px;">

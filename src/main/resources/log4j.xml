@@ -12,7 +12,7 @@
     </appender>
 
     <!-- Core Loggers. -->
-    <logger name="com.smilebrands">
+    <logger name="com.hiteak">
         <level value="DEBUG" />
         <appender-ref ref="CONSOLE"/>
     </logger>

@@ -12,6 +12,8 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
+            classpath:spring-mongo.xml,
+            classpath:spring-services.xml
         </param-value>
     </context-param>
     <!-- initialization of the IoC container -->

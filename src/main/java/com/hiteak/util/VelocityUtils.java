@@ -115,43 +115,7 @@ public class VelocityUtils {
         return result;
     }
 
-    public static String getDateAsString(Date dt, String format){
-        String result = "";
-        if(dt != null){
-            if(format == null){
-                format = "MM-dd-yyyy";
-            }
-            Format df = new SimpleDateFormat(format);
-            result = df.format(dt);
-        }
-        return result;
-    }
 
-    public static Integer getTimeAsDigit(Date dt){
-        Integer result = 0;
-        if(dt != null){
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(dt);
-            result = Integer.valueOf(cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE));
-        }
-        return result;
-    }
-
-    public static Date parseDate(String dateStr, String format){
-        Date result = null;
-        if(dateStr != null && dateStr.trim().length() > 0){
-            if(format == null){
-                format = "MM-dd-yyyy";
-            }
-            SimpleDateFormat df = new SimpleDateFormat(format);
-            try {
-                result = df.parse(dateStr);
-            } catch (ParseException e) {
-                logger.debug("Fail to parse " + dateStr + " to Date with format " + format);
-            }
-        }
-        return result;
-    }
 
     public static String convertListMapToCSV(List<LinkedHashMap<String, String>> mapList){
         String filePath = "/opt/callcenter/" + UUID.randomUUID() + ".csv";

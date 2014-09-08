@@ -11,13 +11,13 @@
 
     <context:annotation-config />
 
-    <mongo:mongo id="mongoShards" host="itchy.bnd.corp" port="27017"/>
+    <mongo:mongo id="mongoShards" host="localhost" port="27017"/>
 
     <!-- mongoDB config -->
     <mongo:db-factory
         id="mongoDbFactory"
         mongo-ref="mongoShards"
-        dbname="callCenter"/>
+        dbname="hiteak"/>
 
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>

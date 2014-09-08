@@ -1,3 +1,6 @@
+body {
+    color: #363535;
+}
 .pointer {
     cursor: pointer;
 }
@@ -26,7 +29,7 @@ ul.sub-menu:hover {
 ul.sub-menu {
     display:none;
     position:absolute;
-    width:100px;
+    padding: 10px;
     z-index:15;
     background:#fff repeat-x;
     left:auto;
@@ -146,4 +149,8 @@ tr td.product-td-item:hover .product_info {
     color: #FFF;
     line-height: 20px;
     margin-bottom: 20px;
+}
+
+.font-bold {
+    font-weight: bold;
 }
