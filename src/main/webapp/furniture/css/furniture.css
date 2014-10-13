@@ -1,4 +1,8 @@
+@font-face { font-family: Test; src: url('/furniture/fonts/NordicaHairline.otf'); }
+@font-face { font-family: Delicious; font-weight: bold; src: url('NordicaThin.otf');}
+
 body {
+
     color: #363535;
 }
 .pointer {

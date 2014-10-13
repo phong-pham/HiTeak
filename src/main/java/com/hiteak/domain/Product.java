@@ -22,12 +22,14 @@ public class Product {
     private String productName;
     private String productCode;
     private String productDescription;
-    private String imageSource;
+    private List<String> imageSources;
     private Double retailPrice;
     private Double specialPrice;
 
     private List<Long> childrenProductId = new ArrayList<Long>();
     private Long parentProductId;
+
+    private List<String> keywords = new ArrayList<String>();
 
     private String createDateTime;
     private Integer createUserId;
@@ -40,12 +42,12 @@ public class Product {
         this.createDateTime = DateTimeUtils.getDateAsString(new Date(), "MM-dd-yyyy HH:mm:ss");
     }
 
-    public Product(Long productId, String name, String code, String description, String imageSource, Double retailPrice, Double specialPrice){
+    public Product(Long productId, String name, String code, String description, List<String> imageSources, Double retailPrice, Double specialPrice){
         this.productId = productId;
         this.productName = name;
         this.productCode = code;
         this.productDescription = description;
-        this.imageSource = imageSource;
+        this.imageSources = imageSources;
         this.retailPrice = retailPrice;
         this.specialPrice = specialPrice;
 
@@ -92,12 +94,12 @@ public class Product {
         this.productDescription = productDescription;
     }
 
-    public String getImageSource() {
-        return imageSource;
+    public List<String> getImageSources() {
+        return imageSources;
     }
 
-    public void setImageSource(String imageSource) {
-        this.imageSource = imageSource;
+    public void setImageSources(List<String> imageSources) {
+        this.imageSources = imageSources;
     }
 
     public Double getRetailPrice() {
@@ -130,6 +132,14 @@ public class Product {
 
     public void setParentProductId(Long parentProductId) {
         this.parentProductId = parentProductId;
+    }
+
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(List<String> keywords) {
+        this.keywords = keywords;
     }
 
     public String getCreateDateTime() {

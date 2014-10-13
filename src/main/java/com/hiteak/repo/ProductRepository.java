@@ -11,5 +11,6 @@ public interface ProductRepository {
 
     public Product persistProduct(Product product);
     public List<Product> findProductByCategory(Integer categoryId);
+    public Product findProductById(Long productId);
 
 }

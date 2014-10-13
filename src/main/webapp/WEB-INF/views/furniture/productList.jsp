@@ -66,7 +66,7 @@
                         <tr>
                     </c:if>
                     <td class="product-td-item">
-                        <a href="productList?productId=${product.productId}" class="product-td-item">
+                        <a href="product?productId=${product.productId}" class="product-td-item">
                             <br/>
                             <img class="product-td-item" src="${pageContext.request.contextPath}/${product.imageSource}" alt="Outdoor Dining Chairs"/>
                             <div class="product_info">
@@ -99,7 +99,7 @@
                             <tr>
                         </c:if>
                         <td class="product-td-item">
-                            <a href="productList?productId=${product.productId}" class="product-td-item">
+                            <a href="product?productId=${product.productId}" class="product-td-item">
                                 <br/>
                                 <img class="product-td-item" src="${pageContext.request.contextPath}/${product.imageSource}" alt="Outdoor Dining Chairs"/>
                                 <div class="product_info">

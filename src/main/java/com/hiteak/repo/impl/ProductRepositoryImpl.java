@@ -27,4 +27,9 @@ public class ProductRepositoryImpl extends AbstractRepositoryImpl implements Pro
         Query query = new Query(Criteria.where("categoryId").is(categoryId));
         return mongoOperations.find(query, Product.class);
     }
+
+    @Override
+    public Product findProductById(Long productId) {
+        return mongoOperations.findById(productId, Product.class);
+    }
 }

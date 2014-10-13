@@ -9,7 +9,7 @@
         <div class="col-md-4 col-sm2 pull-right">
             <div class="input-group">
                 <input type="text" class="form-control input-sm col-md-4" placeholder="Search for products"/>
-                <span class="input-group-addon glyphicon glyphicon-search"/>
+                <span class="input-group-addon glyphicon glyphicon-search pointer"/>
             </div>
             <strong class="navbar-brand pull-right">Call Us Today
                 <a style="color: #B0CE25; font-size: 20px; padding-left: 10px; cursor: pointer;" href="tel:+17149980088">(+1) 714-998-0088</a>
@@ -32,10 +32,10 @@
             <li>
                 <a class="menu-item pointer" href="about">About</a>
                 <ul class="sub-menu">
-                    <li><a class="menu-item" href="/about">About Us</a></li>
-                    <li><a class="menu-item" href="/aboutTeak">About Our Teak</a></li>
-                    <li><a class="menu-item" href="/customerService">Customer Service</a></li>
-                    <li><a class="menu-item">Request Catalogue</a></li>
+                    <li><a class="menu-item" href="about">About Us</a></li>
+                    <li><a class="menu-item" href="aboutTeak">About Our Teak</a></li>
+                    <li><a class="menu-item" href="customerService">Customer Service</a></li>
+                    <li><a class="menu-item" href="requestCatalog">Request Catalog</a></li>
                     <li><a class="menu-item">Customer Review</a></li>
                 </ul>
             </li>

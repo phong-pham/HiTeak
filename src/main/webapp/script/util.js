@@ -11,38 +11,34 @@ $.postJSON = function(url, data, callback) {
 
 $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
 
-var SBI = function(){
-    this.SBI_KEY_ARROW_UP = 38;
-    this.SBI_KEY_ARROW_DOWN = 40;
-    this.SBI_KEY_ENTER = 13;
-    this.SBI_KEY_SPACE = 32;
+var HiTeak = function(){
+    this.HITEAK_KEY_ARROW_UP = 38;
+    this.HITEAK_KEY_ARROW_DOWN = 40;
+    this.HITEAK_KEY_ENTER = 13;
+    this.HITEAK_KEY_SPACE = 32;
 
-    this.validatePatientID = function(pid){
-        if(!(+(pid)) || $.trim(pid).length == 0){
-            return 'is required';
-        }else{
-            pid = $.trim(pid);
-            if(!this.isNumeric(pid)){
-                return 'must be a number';
-//            }else if(pid.charAt(pid.length - 1) != '0'){
-//                return 'must end with 0';
-            }else{
-                return '';
+    this.validateForm = function(form){
+        var isValid     = true,
+            inputs      = form.find('input'),
+            input       = null,
+            error       = '',
+            val         = null,
+            inputType   = null;
+        inputs.push.apply(inputs, form.find('textarea'));
+        for(var i=0; i<inputs.length; i++){
+            error = '';
+            input = $(inputs[i]);
+            inputType = input.attr('type');
+            val =  inputType == 'checkbox' ? input.attr('checked') : input.val();
+            if(input.hasClass('required') && (val === undefined || val === null || !val)){
+                error = 'is required.';
+            }else if(input.attr('data-type') == 'number' && !isNumeric(val)){
+                error = 'must be a number.';
             }
+            this.updateValidationComponent(input, '.form-group', '.validation-cmp', error);
+            isValid = isValid && !error;
         }
-    };
-
-    this.facilityIdsList = [];
-    this.validateFacilityID = function(fid){
-        if(fid == null || $.trim(fid).length == 0){
-            return 'is required';
-        }else if(!this.isNumeric(fid)){
-            return 'must be a number';
-        }else if(this.facilityIdsList.indexOf(fid) == -1){
-            return 'is invalid';
-        }else{
-            return '';
-        }
+        return isValid;
     };
 
     this.isNumeric = function(n){
@@ -144,7 +140,7 @@ var SBI = function(){
                     + year;
             }else if(format == 'd-M-Y'){
                 result = ('0' + date).slice(-2) + '-'
-                    + SBI.SHORT_MONTH[month-1] + '-'
+                    + this.SHORT_MONTH[month-1] + '-'
                     + year;
             }
 
@@ -172,14 +168,14 @@ var SBI = function(){
         return content;
     };
 
-    this.updateValidationComponent = function(cmp, parentCls, validationCls, errorMsg){
+    this.updateValidationComponent = function(cmp, parentCls, validationCls, errorMsg, hideValidationCmp){
         var parent          = cmp.parents(parentCls),
             validationCmp   = parent.find(validationCls);
         if(validationCmp.length > 0){
             if(errorMsg){
                 validationCmp.css('display', 'inline-block');
                 validationCmp[0].setAttribute('data-original-title', validationCmp[0].getAttribute('field-name') + ' ' + errorMsg.trim() + '.');
-            }else{
+            }else if(hideValidationCmp){
                 validationCmp.css('display', 'none');
             }
             parent[errorMsg ? 'addClass' : 'removeClass']('has-error');
@@ -201,10 +197,10 @@ var SBI = function(){
     /********************************************************************************************************************************************
                                 BEGIN DIALOG
     **********************************************************************************************************************************************/
-    this.SBI_ALERT_LEVEL_SUCCESS = 0;
-    this.SBI_ALERT_LEVEL_MESSAGE = 1;
-    this.SBI_ALERT_LEVEL_WARNING = 2;
-    this.SBI_ALERT_LEVEL_ERROR = 3;
+    this.HITEAK_ALERT_LEVEL_SUCCESS = 0;
+    this.HITEAK_ALERT_LEVEL_MESSAGE = 1;
+    this.HITEAK_ALERT_LEVEL_WARNING = 2;
+    this.HITEAK_ALERT_LEVEL_ERROR = 3;
     this.dialogCompTpl = '<div id="alertInfo" class="modal" tabindex="-1" role="dialog" aria-hidden="true" style="$ALERT_TOP">' +
                              '<div class="modal-dialog modal-sm">' +
                                  '<div class="modal-content">' +
@@ -247,13 +243,13 @@ var SBI = function(){
         yesBtn      = alertInfo.find('.yes-btn');
         if(alertBody && alertHeader && alertTitle && noBtn && yesBtn){
             alertHeader.removeClass('success message warning error');
-            if(alertLevel == this.SBI_ALERT_LEVEL_SUCCESS){
+            if(alertLevel == this.HITEAK_ALERT_LEVEL_SUCCESS){
                 alertHeader.addClass('success');
-            }else if(alertLevel == this.SBI_ALERT_LEVEL_MESSAGE){
+            }else if(alertLevel == this.HITEAK_ALERT_LEVEL_MESSAGE){
                 alertHeader.addClass('message');
-            }else if(alertLevel == this.SBI_ALERT_LEVEL_WARNING){
+            }else if(alertLevel == this.HITEAK_ALERT_LEVEL_WARNING){
                 alertHeader.addClass('warning');
-            }else if(alertLevel == this.SBI_ALERT_LEVEL_ERROR){
+            }else if(alertLevel == this.HITEAK_ALERT_LEVEL_ERROR){
                 alertHeader.addClass('error')
             }
             noBtnHandler = noBtnHandler || function(){alertInfo.modal('hide');};
@@ -389,7 +385,7 @@ var SBI = function(){
             filterForCmp    = $('#' + this.getAttribute('filterInputFor'));
         if(filterForCmp && filterForCmp.length > 0
             && filterCmp && filterCmp.length > 0){
-            SBI.doFilterList(filterCmp, filterForCmp);
+            this.doFilterList(filterCmp, filterForCmp);
         }
     });
     $('.glyphicon-remove[removeFilterFor]').click(function(){
@@ -466,8 +462,8 @@ var SBI = function(){
                     td2     = $(row2).find('td[name=' + sortedField + ']'),
                     o1      = td1.attr('value'),
                     o2      = td2.attr('value'),
-                    val1    = SBI.isNumeric(o1) ? +o1 : o1,
-                    val2    = SBI.isNumeric(o2) ? +o2 : o2;
+                    val1    = this.isNumeric(o1) ? +o1 : o1,
+                    val2    = this.isNumeric(o2) ? +o2 : o2;
                 if(val1 > val2){
                     result = 1;
                 }else if(val1 < val2){
@@ -502,163 +498,5 @@ var SBI = function(){
         color: "#4D5360",
         highlight: "#616774",
     }];
-
-    /********************************************************************************************************************************************
-                                    BEGIN PATIENT INFO FORM
-    **********************************************************************************************************************************************/
-    this.patientFormTpl = '$SEPARATOR' +
-                     '<form class="form-horizontal patient-info-form $APPOINTMENT_STATUS" role="form">' +
-                        '<input class="agent-call-log-id $LINE" style="display:none"></input>' +
-                        '<input class="appt-call-log-id $LINE" style="display:none"></input>' +
-                        '<div class="form-group">' +
-                            '<label class="col-sm-3 control-label">Patient ID&nbsp;' +
-                                '<span style="display:none;" class="text-danger validation-cmp" data-toggle="tooltip" field-name="Patient ID" data-placement="right">*</span>' +
-                            '</label>' +
-                            '<div class="col-sm-7">' +
-                                '<input type="text" class="form-control input-sm patient-id-input $LINE" placeholder="Patient ID"/>' +
-                            '</div>' +
-                            '$REMOVE_OPTION' +
-                        '</div>' +
-                        '<div class="form-group">' +
-                            '<label class="col-sm-3 control-label">Facility ID&nbsp;' +
-                                '<span style="display:none;" class="text-danger validation-cmp" data-toggle="tooltip" field-name="Facility ID" data-placement="right">*</span>' +
-                            '</label>' +
-                            '<div class="col-sm-7">' +
-                                '<input type="text" class="form-control input-sm facility-id-input $LINE" placeholder="Facility ID" data-type="number" length=5/>' +
-                            '</div>' +
-                        '</div>' +
-                        '<div class="form-group">' +
-                            '<label class="col-sm-3 control-label">Appointment&nbsp;' +
-                                '<span style="display:none;" class="text-danger validation-cmp" data-toggle="tooltip" field-name="Appointment" data-placement="right">*</span>' +
-                            '</label>' +
-                            '<div class="col-sm-4">' +
-                                '<input type="text" class="form-control appointment-date-time input-sm patient-date-input patient-appointment-datepicker-$LINE $LINE" placeholder="Date" name="datepicker"/>' +
-                            '</div>' +
-                            '<div class="col-sm-5 form-inline">' +
-                                '<select class="form-control input-sm appointment-date-time patient-appointment-hour $LINE">$HOURS_OPTIONS</select>' +
-                                '<select class="form-control input-sm appointment-date-time patient-appointment-minute $LINE">$MINUTES_OPTIONS</select>' +
-                                '<select class="form-control input-sm appointment-date-time patient-appointment-ampm $LINE">' +
-                                    '<option value="AM">AM</option>' +
-                                    '<option value="PM">PM</option>' +
-                                '</select>' +
-                            '</div>' +
-                        '</div>' +
-                        '<div class="form-group" style="margin-bottom: 0px;">' +
-                            '<label class="col-sm-3 control-label">Email Captured?</label>' +
-                            '<label class="col-sm-2" style="text-align: left;">' +
-                                '<input type="checkbox" class="input-sm patient-email-captured $LINE" style="width: 20px;"></input>' +
-                            '</label>' +
-                            '<label class="col-sm-4 control-label">Waiting On Insurance?</label>' +
-                            '<label class="col-sm-2" style="text-align: left;">' +
-                                '<input type="checkbox" class="input-sm patient-insurance-waiting $LINE" style="width: 20px;"></input>' +
-                            '</label>' +
-                        '</div>' +
-                     '</form>';
-
-    this.addPatientForm = function(patient, body, canRemove){
-        var patientForm     = this.patientFormTpl,
-            hourOptions     = '',
-            minuteOptions   = '',
-            numberOfForm    = body.find('.patient-info-form').length,
-            random          = Math.random().toString().substr(2),
-            removeCmp       = '<span class="glyphicon glyphicon-minus remove-patient-info-$LINE" style="margin-top:10px; cursor:pointer" data-toggle="tooltip" data-placement="right" title="Remove Patient" line="' + random +'"/>';
-        for(var i=1; i<=12; i++){
-            hourOptions += '<option value="' + i + '"' + (i==8? ' selected' : '') +'>' + ('0'+i).slice(-2) + '</option>';
-        }
-        for(var i=0; i<59; i=i+5){
-            minuteOptions += '<option value="' + i + '">' + ('0'+i).slice(-2) + '</option>';
-        }
-        patientForm = patientForm.replace(/\$HOURS_OPTIONS/g, hourOptions);
-        patientForm = patientForm.replace(/\$MINUTES_OPTIONS/g, minuteOptions);
-        patientForm = patientForm.replace(/\$SEPARATOR/g, numberOfForm > 0 ? '<hr class="line-' + random +'"/>' : '');
-        patientForm = patientForm.replace(/\$REMOVE_OPTION/g, canRemove ? removeCmp : '');
-        patientForm = patientForm.replace(/\$LINE/g, random);
-        if(patient){
-            if(patient.appointmentStatus == 'ACTIVE'){
-                patientForm = patientForm.replace(/\$APPOINTMENT_STATUS/g,'verified');
-            }else{
-                patientForm = patientForm.replace(/\$APPOINTMENT_STATUS/g,'unverified');
-            }
-        }else{
-            patientForm = patientForm.replace(/\$APPOINTMENT_STATUS/g,'');
-        }
-
-        body.append(patientForm);
-        $('.patient-appointment-datepicker-' + random).datepicker();
-        $('input.' + random).change(this.validatePatientForm);
-        $('select.' + random).change(this.validatePatientForm);
-
-        if(patient){
-            $('.patient-id-input.' + random).val(patient.patientId);
-            $('.facility-id-input.' + random).val(patient.facilityId);
-            $('.agent-call-log-id.' + random).val(patient.callLogId);
-            $('.appt-call-log-id.' + random).val(patient.appointmentCallLogId);
-
-            $('.patient-email-captured.' + random)[0].checked = patient.emailCaptured && (patient.emailCaptured == 'true' || patient.emailCaptured == true);
-            $('.patient-insurance-waiting.' + random)[0].checked = patient.insuranceWaiting && (patient.insuranceWaiting == 'true' || patient.insuranceWaiting == true);
-            var appointmentDate = patient.nextAppointmentDate ? new Date(patient.nextAppointmentDate) : null,    //patient.nextAppointmentDate is represented as 'M-D-Y
-                appointmentTime = patient.nextAppointmentTime,              //patient.nextAppointmentTime is represented as 'HHMM'
-                appointmentHour = appointmentTime ? appointmentTime.substr(0, 2) : 8
-                appointmentMinute   = appointmentTime ? appointmentTime.substr(2, 2) : 0;
-            if(appointmentDate){
-                $('.patient-appointment-datepicker-' + random).datepicker('setDate', appointmentDate);
-                $('.patient-appointment-hour.' + random).val(appointmentHour - (appointmentHour > 12 ? 12 : 0));
-                $('.patient-appointment-minute.' + random).val(appointmentMinute);
-                $('.patient-appointment-ampm.' + random).val(appointmentHour >= 12 ? 'PM' : 'AM');
-            }
-        }
-
-        if(numberOfForm > 0){
-            $('.remove-patient-info-' + random).click(function(){
-                var cmp         = $(this),
-                    form        = cmp.parents('.patient-info-form'),
-                    lineNumber  = this.getAttribute('line');
-                if(form){
-                    form.detach();
-                    $('hr.line-' + lineNumber).detach();
-                }
-            });
-        }
-        return patientForm;
-    }
-
-    this.validatePatientForm = function(){
-        var cmp             = $(this),
-            parent          = cmp.parents('.form-group'),
-            form            = cmp.parents('.patient-info-form'),
-            patientId       = $(form.find('.patient-id-input')),
-            facilityId      = $(form.find('.facility-id-input')),
-            appointmentDate = $(form.find('.patient-date-input')),
-            hourCmp         = $(form.find('.patient-appointment-hour')),
-            minuteCmp       = $(form.find('.patient-appointment-minute')),
-            amPmCmp         = $(form.find('.patient-appointment-ampm')),
-            callLogId       = $(form.find('.agent-call-log-id'));
-        if(!callLogId.val() && !patientId.val() && !facilityId.val() && !appointmentDate.val()){
-            SBI.updateValidationComponent(patientId, '.form-group', '.validation-cmp', '');
-            SBI.updateValidationComponent(facilityId, '.form-group', '.validation-cmp', '');
-            SBI.updateValidationComponent(appointmentDate, '.form-group', '.validation-cmp', '');
-        }else{
-            if(!patientId.val()){
-                SBI.updateValidationComponent(patientId, '.form-group', '.validation-cmp', 'is required');
-            }else{
-                SBI.updateValidationComponent(patientId, '.form-group', '.validation-cmp', SBI.validatePatientID(patientId.val()));
-            }
-            if(!facilityId.val()){
-                SBI.updateValidationComponent(facilityId, '.form-group', '.validation-cmp', 'is required');
-            }else{
-                SBI.updateValidationComponent(facilityId, '.form-group', '.validation-cmp', SBI.validateFacilityID(facilityId.val()));
-            }
-            if(!appointmentDate.val()){
-                SBI.updateValidationComponent(appointmentDate, '.form-group', '.validation-cmp', 'is required');
-            }else{
-                SBI.updateValidationComponent(appointmentDate, '.form-group', '.validation-cmp',SBI.validateAppointmentDate(appointmentDate.datepicker('getDate'), hourCmp.val(), minuteCmp.val(), amPmCmp.val()));
-            }
-        }
-    };
-
-    /********************************************************************************************************************************************
-                                    BEGIN PATIENT INFO FORM
-    **********************************************************************************************************************************************/
-
 };
-SBI = new SBI();
+HiTeak = new HiTeak();

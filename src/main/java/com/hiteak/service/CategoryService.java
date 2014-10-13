@@ -10,5 +10,6 @@ import java.util.List;
 public interface CategoryService {
 
     public List<Category> getCategoriesById(Integer categoryId, boolean getSubCategories, boolean getProduct, boolean byParent);
+    public Category getCategoryById(Integer categoryId, boolean getSubCategories, boolean getProduct);
     public List<Category> buildBreadCrumb(Category category);
 }

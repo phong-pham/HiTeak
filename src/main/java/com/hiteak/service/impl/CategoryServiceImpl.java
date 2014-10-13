@@ -42,6 +42,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Category getCategoryById(Integer categoryId, boolean getSubCategories, boolean getProduct) {
+        List<Category> list = getCategoriesById(categoryId, getSubCategories, getProduct, false);
+        if(list.size() > 0){
+            return list.get(0);
+        }else{
+            return null;
+        }
+    }
+
+    @Override
     public List<Category> buildBreadCrumb(Category category) {
         List<Category> result = new ArrayList<Category>();
         List<Category> categoryList = new ArrayList<Category>();

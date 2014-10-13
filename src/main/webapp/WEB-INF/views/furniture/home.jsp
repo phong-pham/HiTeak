@@ -14,7 +14,6 @@
 <body>
     <div class="container">
         <jsp:include page="header.jsp"/>
-
         <hr class="separator-10" style="margin-top: -40px;"/>
         <c:forEach var="category" items="${categories}">
             <center>

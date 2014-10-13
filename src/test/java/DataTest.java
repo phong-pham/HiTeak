@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -49,16 +50,16 @@ public class DataTest extends AbstractJUnit4SpringContextTests {
 
         Category outdoorChair = categoryRepository.persistCategory(new Category(null, "Chairs", "furniture/images/cat_1.jpg", outdoorCategory.getCategoryId()));
 
-
+        List<String> imgs = new ArrayList<String>(){{add("");}};
         Category reclining = categoryRepository.persistCategory(new Category(null, "Reclining", "furniture/images/outdoor/chair/out_rec_1.jpg", outdoorChair.getCategoryId()));
-        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC275", "", "furniture/images/outdoor/chairs/out_rec_1.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC669", "", "furniture/images/outdoor/chairs/out_rec_2.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC173", "", "furniture/images/outdoor/chairs/out_rec_3.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC248", "", "furniture/images/outdoor/chairs/out_rec_4.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC298", "", "furniture/images/outdoor/chairs/out_rec_5.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC363", "", "furniture/images/outdoor/chairs/out_rec_6.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC388", "", "furniture/images/outdoor/chairs/out_rec_7.jpg", 100d, 50d));
-        reclining.getProducts().add(new Product(null, "Westimster 5 Position Chair", "HLAC393", "", "furniture/images/outdoor/chairs/out_rec_8.jpg", 100d, 50d));
+        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC275", "", new ArrayList<String>(){{add("furniture/images/outdoor/chairs/out_rec_1.jpg");}}, 100d, 50d));
+        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC669", "", new ArrayList<String>(){{add("furniture/images/outdoor/chairs/out_rec_2.jpg");}}, 100d, 50d));
+        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC173", "", new ArrayList<String>(){{add("furniture/images/outdoor/chairs/out_rec_3.jpg");}}, 100d, 50d));
+        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC248", "", new ArrayList<String>(){{add("furniture/images/outdoor/chairs/out_rec_4.jpg");}}, 100d, 50d));
+        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC298", "", new ArrayList<String>(){{add("furniture/images/outdoor/chairs/out_rec_5.jpg");}}, 100d, 50d));
+        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC363", "", new ArrayList<String>(){{add("furniture/images/outdoor/chairs/out_rec_6.jpg");}}, 100d, 50d));
+        reclining.getProducts().add(new Product(null, "5 Position Chair", "HLAC388", "", new ArrayList<String>(){{add("furniture/images/outdoor/chairs/out_rec_7.jpg");}}, 100d, 50d));
+        reclining.getProducts().add(new Product(null, "Westimster 5 Position Chair", "HLAC393", "", new ArrayList<String>(){{add("furniture/images/outdoor/chairs/out_rec_8.jpg");}}, 100d, 50d));
         for(Product product : reclining.getProducts()){
             product.setCategoryId(reclining.getCategoryId());
             productRepository.persistProduct(product);
@@ -208,5 +209,14 @@ public class DataTest extends AbstractJUnit4SpringContextTests {
         faq4.setContent(content);
         customerServiceRepository.persistCustomerService(faq4);
 
+    }
+
+    @Test
+    public void getRunTime(){
+        Calendar start = Calendar.getInstance();
+        start.set(2014, Calendar.AUGUST, 25, 21, 34, 41);
+        Calendar current = Calendar.getInstance();
+        System.out.println("Run time since " + start.getTime() + " is "
+                + ((current.getTime().getTime()-start.getTime().getTime())/(1000*60*60)));
     }
 }
