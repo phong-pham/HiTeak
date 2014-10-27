@@ -35,7 +35,16 @@
 
         <hibernate.version>3.6.6.Final</hibernate.version>
         <hibernatevalidator.version>4.2.0.Final</hibernatevalidator.version>
+        <jasypt.version>1.9.2</jasypt.version>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>jasypt</id>
+            <name>Java Security Repo</name>
+            <url>scm:svn:http://svn.code.sf.net/p/jasypt/code/tags/jasypt/jasypt-1.9.2/</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
 
@@ -314,6 +323,12 @@
             <version>2.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>1.9.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

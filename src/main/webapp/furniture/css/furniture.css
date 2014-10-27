@@ -158,3 +158,31 @@ tr td.product-td-item:hover .product_info {
 .font-bold {
     font-weight: bold;
 }
+
+.modal-header.error {
+    color: #a94442;
+    border-color: #a94442;
+    background-color: #f2dede;
+}
+.modal-header.warning {
+    color: #8a6d3b;
+    border-color: #8a6d3b;
+    background-color: #fcf8e3;
+}
+.modal-header.success {
+    color: #3c763d;
+    border-color: #3c763d;
+    background-color: #dff0d8;
+}
+.modal-header.message {
+    color: #ffffff;
+    background-color: #428bca;
+    border-color: #428bca;
+}
+
+.padding-15 {
+    padding: 15px;
+}
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}

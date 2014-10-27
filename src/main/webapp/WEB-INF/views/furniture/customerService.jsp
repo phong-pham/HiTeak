@@ -14,6 +14,8 @@
 <body>
     <div class="container">
         <jsp:include page="header.jsp"/>
+        <hr class="separator-10"/>
+
         <h2 style="text-decoration: underline;">Customer Service</h2>
         <div style="padding: 10px;">
             <h3 style="color: #853036;">Order, Tracking, Shipping & Returns</h3>
@@ -33,11 +35,6 @@
         <hr class="separator-10"/>
         <jsp:include page="footer.jsp"/>
     </div>  <!-- END MAIN CONTAINER -->
-
-    <script type="text/javascript" src="${pageContext.request.contextPath}/script/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/script/jquery-ui-1.8.20.custom.min.js"></script>
-    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
-
 
 </body>
 </html>

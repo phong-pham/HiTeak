@@ -4,7 +4,7 @@
             <span class="text-danger validation-cmp" data-toggle="tooltip" field-name="Company Name" data-placement="right">*</span>
         </label>
         <div class="col-sm-7">
-            <input id="companyNameInput" type="text" class="form-control input-sm required" placeholder="Company Name" dataField="companyName" />
+            <input id="companyNameInput" type="text" class="form-control input-sm required" placeholder="Company Name" dataField="organizationName" />
         </div>
     </div>
     <div class="form-group">
@@ -58,7 +58,7 @@
             <span class="text-danger validation-cmp" data-toggle="tooltip" field-name="Zip Code" data-placement="right">*</span>
         </label>
         <div class="col-sm-7">
-            <input id="zipCodeInput" type="text" class="form-control input-sm required" placeholder="Zip Code" dataField="zipCode" />
+            <input id="zipCodeInput" type="text" class="form-control input-sm required" placeholder="Zip Code" dataField="zipCode"  dataType="number"/>
         </div>
     </div>
     <div class="form-group">
@@ -66,7 +66,7 @@
             <span class="text-danger validation-cmp" data-toggle="tooltip" field-name="Email" data-placement="right">*</span>
         </label>
         <div class="col-sm-7">
-            <input id="emailInput" type="text" class="form-control input-sm required" placeholder="Email" dataField="email" />
+            <input id="emailInput" type="text" class="form-control input-sm required" placeholder="Email" dataField="email" dataType="email"/>
         </div>
     </div>
     <div class="form-group">
@@ -74,13 +74,15 @@
             <span class="text-danger validation-cmp" data-toggle="tooltip" field-name="Phone Number" data-placement="right">*</span>
         </label>
         <div class="col-sm-7">
-            <input id="phoneInput" type="text" class="form-control input-sm required" placeholder="Phone Number" dataField="phoneNumber" />
+            <input id="phoneInput" type="text" class="form-control input-sm required" placeholder="Phone Number" dataField="phoneNumber" dataType="number"/>
         </div>
     </div>
     <div class="form-group">
-        <label for="faxInput" class="col-sm-3 control-label">Fax Number</label>
+        <label for="faxInput" class="col-sm-3 control-label">Fax Number
+            <span class="text-danger validation-cmp" data-toggle="tooltip" field-name="Fax Number" data-placement="right" style="display: none;">*</span>
+        </label>
         <div class="col-sm-7">
-            <input id="faxInput" type="text" class="form-control input-sm" placeholder="Fax Number" dataField="faxNumber" />
+            <input id="faxInput" type="text" class="form-control input-sm" placeholder="Fax Number" dataField="faxNumber"  dataType="number"/>
         </div>
     </div>
     <div class="form-group">
@@ -88,7 +90,7 @@
             <span class="text-danger validation-cmp" data-toggle="tooltip" field-name="Questions or Comments" data-placement="right">*</span>
         </label>
         <div class="col-sm-7">
-            <textarea id="questionInput" type="text" class="form-control input-sm required" placeholder="Questions or Comments" dataField="question" rows="4"></textarea>
+            <textarea id="questionInput" type="text" class="form-control input-sm required" placeholder="Questions or Comments" dataField="requestMessage" rows="4"></textarea>
         </div>
     </div>
 </form>

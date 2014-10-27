@@ -23,6 +23,7 @@ public class Product {
     private String productCode;
     private String productDescription;
     private List<String> imageSources;
+    private String imageSource;
     private Double retailPrice;
     private Double specialPrice;
 
@@ -100,6 +101,14 @@ public class Product {
 
     public void setImageSources(List<String> imageSources) {
         this.imageSources = imageSources;
+    }
+
+    public String getImageSource() {
+        return imageSource;
+    }
+
+    public void setImageSource(String imageSource) {
+        this.imageSource = imageSource;
     }
 
     public Double getRetailPrice() {

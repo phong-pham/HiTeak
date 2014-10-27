@@ -19,9 +19,7 @@ import java.util.List;
 /**
  * Created by phongpham on 9/7/14.
  */
-@ContextConfiguration(locations = {"classpath:spring-mongo.xml",
-                                    "classpath:spring-services.xml"})
-public class DataTest extends AbstractJUnit4SpringContextTests {
+public class DataTest extends AbstractTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(DataTest.class);
 
@@ -218,5 +216,13 @@ public class DataTest extends AbstractJUnit4SpringContextTests {
         Calendar current = Calendar.getInstance();
         System.out.println("Run time since " + start.getTime() + " is "
                 + ((current.getTime().getTime()-start.getTime().getTime())/(1000*60*60)));
+    }
+
+    @Test
+    public void testUpdateProduct(){
+        List<Product> products = productRepository.findProductByCategory(2);
+        for(Product product : products){
+
+        }
     }
 }

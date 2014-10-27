@@ -23,19 +23,27 @@ var HiTeak = function(){
             input       = null,
             error       = '',
             val         = null,
-            inputType   = null;
+            inputType   = null,
+            dataType    = null,
+            isRequired  = false;
         inputs.push.apply(inputs, form.find('textarea'));
         for(var i=0; i<inputs.length; i++){
             error = '';
             input = $(inputs[i]);
             inputType = input.attr('type');
+            dataType = input.attr('dataType');
             val =  inputType == 'checkbox' ? input.attr('checked') : input.val();
-            if(input.hasClass('required') && (val === undefined || val === null || !val)){
+            isRequired = input.hasClass('required');
+            if(isRequired && (val === undefined || val === null || !val)){
                 error = 'is required.';
-            }else if(input.attr('data-type') == 'number' && !isNumeric(val)){
-                error = 'must be a number.';
+            }else if(val){
+                if(dataType == 'number' && !this.isNumeric(val)){
+                    error = 'must be a number';
+                }else if(dataType == 'email' && !this.validateEmail(val)){
+                    error = 'is invalid';
+                }
             }
-            this.updateValidationComponent(input, '.form-group', '.validation-cmp', error);
+            this.updateValidationComponent(input, '.form-group', '.validation-cmp', error, !isRequired);
             isValid = isValid && !error;
         }
         return isValid;
@@ -47,11 +55,11 @@ var HiTeak = function(){
     this.validateEmail = function(email){
         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,6})?$/;
         if(!email || $.trim(email).length == 0){
-            return 'is required';
+            return false;
         }else if(!emailReg.test(email)){
-            return 'is invalid';
+            return false;
         }else{
-            return '';
+            return true;
         }
     };
     this.validateAppointmentDate = function(date, hour, minute, amPm){

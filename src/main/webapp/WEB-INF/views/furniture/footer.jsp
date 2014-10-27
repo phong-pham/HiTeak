@@ -53,3 +53,10 @@
         </center>
     </div>
 </div>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/script/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/script/jquery-ui-1.8.20.custom.min.js"></script>
+<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
+
+<script src="${pageContext.request.contextPath}/script/util.js"></script>
+<script src="${pageContext.request.contextPath}/script/hiteak.js"></script>

@@ -17,6 +17,8 @@ public class DateTimeUtils {
 
     private final static Logger logger = LoggerFactory.getLogger(DateTimeUtils.class);
 
+    public final static String DATE_TIME_FORMAT = "MM-dd-yyyy HH:mm:ss";
+
     public static String getDateAsString(Date dt, String format){
         String result = "";
         if(dt != null){

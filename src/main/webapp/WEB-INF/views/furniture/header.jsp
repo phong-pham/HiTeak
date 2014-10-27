@@ -1,4 +1,17 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<div class="modal fade" id="loginView" tabindex="-1" role="dialog" aria-labelledby="loginLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="loginLabel">Login</h4>
+            </div>
+            <div class="modal-body" style="padding-bottom:0px;">
+                <jsp:include page="loginForm.jsp"/>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="alert">
     <div class="row">
@@ -7,9 +20,27 @@
             <img src="${pageContext.request.contextPath}/furniture/images/hiteak_furniture.gif"/>
         </a>
         <div class="col-md-4 col-sm2 pull-right">
-            <div class="input-group">
+            <div class="pull-right">
+                <c:choose>
+                    <c:when test="${userName != null}">
+                        <a class="login-link pointer" style="display: none;">Login</a>
+                        <div class="login-info">
+                            <span class="login-name">Hello ${userName}</span> |
+                            <a class="logout-link pointer">Logout</a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="login-link pointer">Login</a>
+                        <div class="login-info" style="display: none;">
+                            <span class="login-name"></span> |
+                            <a class="logout-link pointer">Logout</a>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+            <div class="input-group pull-right">
                 <input type="text" class="form-control input-sm col-md-4" placeholder="Search for products"/>
-                <span class="input-group-addon glyphicon glyphicon-search pointer"/>
+                <span class="input-group-addon glyphicon glyphicon-search pointer" style="top: 0;"/>
             </div>
             <strong class="navbar-brand pull-right">Call Us Today
                 <a style="color: #B0CE25; font-size: 20px; padding-left: 10px; cursor: pointer;" href="tel:+17149980088">(+1) 714-998-0088</a>
