@@ -1,6 +1,7 @@
 package com.hiteak.controllers;
 
 import com.hiteak.domain.ResponseWrapper;
+import com.hiteak.domain.login.Login;
 import com.hiteak.domain.login.User;
 import com.hiteak.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,40 @@ public class SecurityController extends AbstractController{
             result.setSuccess(false);
             result.setMessage(ex.getMessage());
         }
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "request-password", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseWrapper doRequestPassword(@RequestParam String userName){
+        ResponseWrapper result = new ResponseWrapper();
+        try{
+            Login login = userService.requestPassword(userName);
+            if(login != null){
+                result.setSuccess(true);
+            }
+        }catch (Exception ex){
+            result.setMessage(ex.getMessage());
+            result.setSuccess(false);
+        }
+
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "request-sign-up", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseWrapper doRequestSignUp(@RequestBody String json){
+        ResponseWrapper result = new ResponseWrapper();
+        logger.debug("json: {}", json);
+        User user = (User)convertJson(json, User.class);
+        try{
+            userService.doPersistUser(user);
+            result.setSuccess(true);
+        }catch (Exception ex){
+            result.setSuccess(false);
+            result.setMessage(ex.getMessage());
+        }
+
         return result;
     }
 

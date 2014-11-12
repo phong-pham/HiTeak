@@ -1,25 +1,26 @@
 package com.hiteak.controllers;
 
 import com.hiteak.domain.Category;
+import com.hiteak.domain.Image;
 import com.hiteak.domain.Product;
+import com.hiteak.domain.ResponseWrapper;
 import com.hiteak.domain.login.User;
 import com.hiteak.repo.CustomerServiceRepository;
 import com.hiteak.service.CategoryService;
 import com.hiteak.service.ProductService;
 import com.hiteak.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by phongpham on 8/23/14.
@@ -45,16 +46,16 @@ public class FurnitureController extends  AbstractController{
                               @RequestParam(required = false) Long productId,
                               HttpServletRequest request){
         int carouselHeight = 200;
-        String prefixImg = "banner";
-        List<String> carouselImages = new ArrayList<String>();
+        List<Image> carouselImages = new ArrayList<Image>();
 
         String result = path;
         if(path.equalsIgnoreCase("home")){
             carouselHeight = 500;
-            prefixImg = "home";
             List<Category> categoryList = categoryService.getCategoriesById(-1, true, false, true);
             System.out.println(categoryList.size());
             modelMap.addAttribute("categories", categoryList);
+            modelMap.addAttribute("carouselType", "HOME_SLIDE");
+            carouselImages = productService.getImageByType("HOME_SLIDE");
         }else if(path.equalsIgnoreCase("customerService")){
             modelMap.addAttribute("howTos", customerServiceRepository.getCustomerService(false));
             modelMap.addAttribute("faqs", customerServiceRepository.getCustomerService(true));
@@ -83,11 +84,14 @@ public class FurnitureController extends  AbstractController{
                 }
             }
         }
-        for(int i=0; i<5; i++){
-            carouselImages.add(prefixImg + (i+1));
+        if(!modelMap.containsKey("carouselType")){
+            modelMap.addAttribute("carouselType", "BANNER_SLIDE");
+            carouselImages = productService.getImageByType("BANNER_SLIDE");
         }
-        modelMap.addAttribute("carouselHeight", carouselHeight);
+
+        modelMap.addAttribute("carouselHeight", carouselImages.size() > 0 ? carouselHeight : 20);
         modelMap.addAttribute("carouselImages", carouselImages);
+        modelMap.addAttribute("carouselImagesCnt", carouselImages.size());
         List<Category> temp = categoryService.getCategoriesById(-1, true, false, true);
         List<Category> categoriesForMenu = new ArrayList<Category>();
         for(Category category : temp){
@@ -126,5 +130,20 @@ public class FurnitureController extends  AbstractController{
         return hasProductList;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "request-upload-img", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseWrapper doUploadImage(@RequestBody String json){
+        ResponseWrapper result = new ResponseWrapper();
+        Image image = (Image)convertJson(json, Image.class);
+        image = productService.uploadImage(image);
+        if(image.getImageId() != null){
+            result.setSuccess(true);
+            result.setData(image);
+        }else{
+            result.setSuccess(false);
+            result.setMessage("Fail to upload image.");
+        }
+        return result;
+    }
 
 }

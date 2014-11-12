@@ -12,6 +12,34 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="editSlideView" tabindex="-1" role="dialog" aria-labelledby="editSlideLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="editSlideLabel">Edit Slides</h4>
+            </div>
+            <div class="modal-body" style="padding-bottom:0px;">
+                <div class="row">
+                    <div class="col-md-3 slide-list">
+                    </div>
+                    <div class="col-md-9 preview-div">
+                        <img class="slide-preview" style="width: 100%; height: 100%;"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="progress upload-image-progress" style="width: 50%; float: left; display: none;">
+                    <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <span class="progress-message">Please wait while saving images...</span>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="saveImgSlideBtn" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="alert">
     <div class="row">
@@ -72,10 +100,11 @@
             </li>
         </ul>
     </div>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: ${carouselHeight}px;">
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: ${carouselHeight}px;" carouselType="${carouselType}">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-            <c:forEach var="i" begin="0" end="4">
+            <c:forEach var="i" begin="0" end="${carouselImagesCnt-1}">
                 <li data-target="#myCarousel" data-slide-to="${i}"<c:if test="${i==0}">class="active"</c:if>></li>
             </c:forEach>
         </ol>
@@ -88,14 +117,18 @@
                 </c:choose>
                     <div class="container">
                         <div class="carousel-caption">
-                            <img src="${pageContext.request.contextPath}/furniture/images/${img}.jpg"/>
+                            <img src="${img.imageData}" style="width: 100%; height: 100%;" imageId="${img.imageId}"/>
                         </div>
                     </div>
                 </div>
                 <c:set var="i" value="${i+1}"/>
             </c:forEach>
         </div>
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        <c:if test="${carouselImagesCnt > 0}">
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        </c:if>
+        <span class="glyphicon glyphicon-edit pointer edit-entity" style="position: absolute; top: 0; right: -20px;" edit-entity="slides"/>
     </div>
+
 </div>

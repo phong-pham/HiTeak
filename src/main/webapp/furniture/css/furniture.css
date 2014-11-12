@@ -186,3 +186,16 @@ tr td.product-td-item:hover .product_info {
 .margin-bottom-10 {
     margin-bottom: 10px;
 }
+.padding-right-10 {
+    padding-right: 10px;
+}
+
+#loginView .input-group {
+    padding-left: 10%;
+}
+#loginView .input-group-addon {
+    width: 150px;
+}
+#loginView input {
+    width: 300px;
+}

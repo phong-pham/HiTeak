@@ -15,13 +15,17 @@
     <div class="container">
         <jsp:include page="header.jsp"/>
         <hr class="separator-10" style="margin-top: -40px;"/>
+        <c:set var="count" value="0"/>
         <c:forEach var="category" items="${categories}">
+            <c:if test="${count > 0}">
+                <hr class="separator-5"/>
+            </c:if>
+            <c:set var="count" value="${count+1}"/>
             <center>
                 <h2>${category.categoryName}</h2>
             </center>
             <hr/>
             <c:set var="i" value="0"/>
-            <c:set var="count" value="0"/>
             <table class="home-page" style="width: 80%;">
                 <c:forEach var="subCategory" items="${category.subCategories}">
                     <c:if test="${i%3 == 0}">
@@ -50,7 +54,6 @@
                     <c:set var="i" value="${i+1}"/>
                 </c:forEach>
             </table>
-            <hr class="separator-5"/>
         </c:forEach>
 
         <hr class="separator-10"/>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 /**
  * Created by phongpham on 10/26/14.
@@ -72,6 +73,29 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getUserById(Long userId) {
         return userRepo.getUserById(userId);
+    }
+
+    @Override
+    public Login requestPassword(String userName) {
+        Login login = userRepo.getLoginByUserName(userName);
+        if(login != null && login.getUserId() != null){
+            User user = userRepo.getUserById(login.getUserId());
+            login.setActive(false);
+
+            Login tempLogin = new Login();
+            login.setUserName(userName);
+            login.setUserId(login.getUserId());
+            String tempPassword = UUID.randomUUID().toString();
+            login.setPassword(tempPassword);
+            userRepo.persistLogin(tempLogin);
+            userRepo.persistLogin(login);
+            user.setLoginId(tempLogin.getLoginId());
+            userRepo.persistUser(user);
+
+            return login;
+        }else{
+            throw new RuntimeException("User not found for userName[" + userName + "]");
+        }
     }
 
     @Override

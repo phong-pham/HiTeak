@@ -17,7 +17,7 @@ var HiTeak = function(){
     this.HITEAK_KEY_ENTER = 13;
     this.HITEAK_KEY_SPACE = 32;
 
-    this.validateForm = function(form){
+    this.validateForm = function(form, groupCls){
         var isValid     = true,
             inputs      = form.find('input'),
             input       = null,
@@ -25,14 +25,23 @@ var HiTeak = function(){
             val         = null,
             inputType   = null,
             dataType    = null,
-            isRequired  = false;
+            isRequired  = false,
+            minLength   = 0,
+            maxLength   = 99;
+        groupCls = groupCls || '.form-group';
         inputs.push.apply(inputs, form.find('textarea'));
         for(var i=0; i<inputs.length; i++){
             error = '';
             input = $(inputs[i]);
+            if(input.css('display') == 'none' || input.parents(groupCls).css('display') == 'none'){
+                continue;
+            }
             inputType = input.attr('type');
             dataType = input.attr('dataType');
             val =  inputType == 'checkbox' ? input.attr('checked') : input.val();
+            minLength = input.attr('minLength') || 0;
+            maxLength = input.attr('maxLength') || 99;
+
             isRequired = input.hasClass('required');
             if(isRequired && (val === undefined || val === null || !val)){
                 error = 'is required.';
@@ -41,9 +50,13 @@ var HiTeak = function(){
                     error = 'must be a number';
                 }else if(dataType == 'email' && !this.validateEmail(val)){
                     error = 'is invalid';
+                }else if(minLength > val.length){
+                    error = 'must be at least ' + minLength + ' character(s)';
+                }else if(maxLength < val.length){
+                    error = 'must be shorter than ' + maxLength + ' character(s)';
                 }
             }
-            this.updateValidationComponent(input, '.form-group', '.validation-cmp', error, !isRequired);
+            this.updateValidationComponent(input, groupCls, '.validation-cmp', error, !isRequired);
             isValid = isValid && !error;
         }
         return isValid;
@@ -186,8 +199,8 @@ var HiTeak = function(){
             }else if(hideValidationCmp){
                 validationCmp.css('display', 'none');
             }
-            parent[errorMsg ? 'addClass' : 'removeClass']('has-error');
         }
+        parent[errorMsg ? 'addClass' : 'removeClass']('has-error');
     };
 
     this.isEmpty = function(obj){
@@ -324,12 +337,13 @@ var HiTeak = function(){
             }
         }
     };
-    this.doRetrieveDataFromForm = function(form){
+    this.doRetrieveDataFromForm = function(form, groupCls){
         if(!form){
             return {};
         }
+        groupCls = groupCls || '.form-group';
         var result  = {};
-            fields  = form.find('.form-group');
+            fields  = form.find(groupCls);
         for(var i=0; i<fields.length; i++){
             var field       = $(fields[i]),
                 inputs      = field.find('[dataField]'),
