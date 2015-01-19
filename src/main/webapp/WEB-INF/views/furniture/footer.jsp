@@ -38,15 +38,51 @@
     </div>
 </div>
 
+<div class="modal fade" id="sdsdsd" tabindex="-1" role="dialog" aria-hidden="true" style="height:550px;width:650px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="padding-bottom:0px;">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="businessShowLarge" tabindex="-1" role="dialog" aria-labelledby="loginLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="display: none;">
+            </div>
+            <div class="modal-body" style="padding-bottom:0px;">
+                <div>
+                    <img id="business-show-img-lg" style="width: 100%; height: 100%;"/>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 10px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="alert">
     <div class="row">
-        <address>
-            <strong>HL DISTRIBUTION, INC.</strong><br/>
-            22885 Savi Ranch Pkwy, Unit D<br/>
-            Yorba Linda, CA 92887<br/>
-            <abbr title="Phone">Tel:</abbr><a href="tel:+17149980088"> (+1) 714-998-0088</a><br/>
-            Fax: (+1) 714-998-0087
-        </address>
+        <div class="col-md-4 col-sm-6">
+            <address>
+                <strong>HL DISTRIBUTION, INC.</strong><br/>
+                22885 Savi Ranch Pkwy, Unit D<br/>
+                Yorba Linda, CA 92887<br/>
+                <abbr title="Phone">Tel:</abbr><a href="tel:+17149980088"> (+1) 714-998-0088</a><br/>
+                Fax: (+1) 714-998-0087
+            </address>
+        </div>
+        <div class="col-md-8 col-sm-6">
+            <c:forEach var="businessShow" items="${businessShowList}">
+                <img class="business-show-img" style="float: right; width: 100px; height: 100px; cursor: pointer;" src="${businessShow.showLogo}"/>
+            </c:forEach>
+        </div>
+    </div>
+    <div class="row">
         <hr/>
         <center>
             <p>&copy; 2012-<fmt:formatDate value="${date}" pattern="yyyy"/> Copyright by Hiteakfurniture.com. All rights reserved.</p>

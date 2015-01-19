@@ -50,7 +50,16 @@ ul.sub-menu {
     padding-left: 10px;
 }
 .carousel {
-    margin-bottom: 60px;
+    /*margin-bottom: 30px;*/
+}
+.carousel .container {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.carousel-caption {
+    padding-bottom: 20px;
+    left: 0;
+    right: 0;
 }
 .carousel-500 {
     height: 500px;
@@ -60,7 +69,8 @@ ul.sub-menu {
 }
 .carousel .item {
     padding-top: 10px;
-    background-color: #B4F3B4;
+    /*background-color: #B4F3B4;*/
+    background-color: transparent;
 }
 .carousel-item-500 {
     height: 500px;
@@ -69,10 +79,19 @@ ul.sub-menu {
     height: 200px;
 }
 .carousel-control {
-    width: 40px;
+    width: 0px;
+    color: #ccc;
+    z-index: 300;
 }
 .carousel-indicators {
     bottom: 0px;
+}
+
+.carousel-indicators li {
+    background-color: #ccc;
+}
+.carousel-indicators .active {
+    background-color: #000;
 }
 
 td.product-td-item {
@@ -80,7 +99,7 @@ td.product-td-item {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     border-top: 0;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 0.5em 1em;
+    padding: 7px 14px;
     text-align: left;
     background-color: #ff;
     background: rgba(0, 0, 0, 0);
@@ -111,7 +130,7 @@ img.product-td-item {
 }
 
 table .product_info {
-    margin-left: 18px;
+    /*margin-left: 18px;*/
     margin-top: 20px;
 }
 
@@ -122,13 +141,13 @@ table {
 
 tr td.product-td-item .product_info {
     position: absolute;
-    background: black;
-    background: rgba(85, 85, 85, 0.85) !important;
+    /*background: black;*/
+    background: rgba(72, 155, 95, 0.65) !important;
     /*background: green;
     background: rgba(195, 248, 197, 0.85) !important;*/
     color: white;
     padding: 0% 10%;
-    width:98%;
+    /*width:98%;*/
     opacity: 0;
     -webkit-transition: all 0.6s ease;
     -moz-transition:    all 0.6s ease;
@@ -198,4 +217,15 @@ tr td.product-td-item:hover .product_info {
 }
 #loginView input {
     width: 300px;
+}
+
+.product-info-tab {
+    background-color: #B4F3B4;
+}
+
+.product-info .navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #fff;
+    background-color: rgba(72, 155, 95, 0.65);
 }

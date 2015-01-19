@@ -222,4 +222,25 @@ $(document).ready(function() {
         }
     };
 
+    $('.product-info-tab a').click(function(){
+        var cmp             = $(this),
+            productInfo     = cmp.parents('.product-info'),
+            productDetail   = productInfo.find('.product-detail'),
+            shownDetail     = productDetail.find('.' + cmp.attr('data')),
+            productInfoTab  = cmp.parents('.product-info-tab'),
+            li              = cmp.parents('li.tab-li');
+        productDetail.find('.detail').css('display', 'none');
+        shownDetail.css('display', 'block');
+        productInfoTab.find('li').removeClass('active');
+        li.addClass('active');
+    });
+
+    $('.business-show-img').click(function(){
+        var cmp                 = $(this),
+            businessShowLgView  = $('#businessShowLarge'),
+            imgCmp              = businessShowLgView.find('img');
+        businessShowLgView.modal();
+        imgCmp.attr('src', cmp.attr('src'));
+    });
+
 });

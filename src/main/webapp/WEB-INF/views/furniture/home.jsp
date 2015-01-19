@@ -14,7 +14,7 @@
 <body>
     <div class="container">
         <jsp:include page="header.jsp"/>
-        <hr class="separator-10" style="margin-top: -40px;"/>
+        <hr class="separator-10" />
         <c:set var="count" value="0"/>
         <c:forEach var="category" items="${categories}">
             <c:if test="${count > 0}">
@@ -24,6 +24,7 @@
             <center>
                 <h2>${category.categoryName}</h2>
             </center>
+            <span class="glyphicon glyphicon-edit pointer edit-entity" style="top: -30px; float: right;" edit-entity="slides"></span>
             <hr/>
             <c:set var="i" value="0"/>
             <table class="home-page" style="width: 80%;">

@@ -104,29 +104,33 @@
     <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: ${carouselHeight}px;" carouselType="${carouselType}">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-            <c:forEach var="i" begin="0" end="${carouselImagesCnt-1}">
-                <li data-target="#myCarousel" data-slide-to="${i}"<c:if test="${i==0}">class="active"</c:if>></li>
-            </c:forEach>
+            <c:if test="${carouselImagesCnt > 0}">
+                <c:forEach var="i" begin="0" end="${carouselImagesCnt-1}">
+                    <li data-target="#myCarousel" data-slide-to="${i}"<c:if test="${i==0}">class="active"</c:if>></li>
+                </c:forEach>
+            </c:if>
         </ol>
         <div class="carousel-inner" >
-            <c:set var="i" value="0"/>
-            <c:forEach var="img" items="${carouselImages}">
-                <c:choose>
-                    <c:when test="${i==0}"><div class="item active" style="height: ${carouselHeight}px;"></c:when>
-                    <c:otherwise><div class="item" style="height: ${carouselHeight}px;"></c:otherwise>
-                </c:choose>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <img src="${img.imageData}" style="width: 100%; height: 100%;" imageId="${img.imageId}"/>
+            <c:if test="${carouselImagesCnt > 0}">
+                <c:set var="i" value="0"/>
+                <c:forEach var="img" items="${carouselImages}">
+                    <c:choose>
+                        <c:when test="${i==0}"><div class="item active" style="height: ${carouselHeight}px;"></c:when>
+                        <c:otherwise><div class="item" style="height: ${carouselHeight}px;"></c:otherwise>
+                    </c:choose>
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <img src="${img.imageData}" style="width: 100%; height: 100%;" imageId="${img.imageId}"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <c:set var="i" value="${i+1}"/>
-            </c:forEach>
+                    <c:set var="i" value="${i+1}"/>
+                </c:forEach>
+            </c:if>
         </div>
         <c:if test="${carouselImagesCnt > 0}">
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" style="margin-left: 20px;"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" style="margin-right: 20px;"><span class="glyphicon glyphicon-chevron-right"></span></a>
         </c:if>
         <span class="glyphicon glyphicon-edit pointer edit-entity" style="position: absolute; top: 0; right: -20px;" edit-entity="slides"/>
     </div>

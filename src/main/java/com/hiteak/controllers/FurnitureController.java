@@ -6,6 +6,7 @@ import com.hiteak.domain.Product;
 import com.hiteak.domain.ResponseWrapper;
 import com.hiteak.domain.login.User;
 import com.hiteak.repo.CustomerServiceRepository;
+import com.hiteak.service.BusinessShowService;
 import com.hiteak.service.CategoryService;
 import com.hiteak.service.ProductService;
 import com.hiteak.service.UserService;
@@ -40,19 +41,21 @@ public class FurnitureController extends  AbstractController{
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BusinessShowService businessShowService;
+
     @RequestMapping(value = "{path}", method = RequestMethod.GET)
     public String getHomePage(ModelMap modelMap, @PathVariable String path,
                               @RequestParam(required = false) Integer categoryId,
                               @RequestParam(required = false) Long productId,
                               HttpServletRequest request){
-        int carouselHeight = 200;
+        int carouselHeight = 300;
         List<Image> carouselImages = new ArrayList<Image>();
 
         String result = path;
         if(path.equalsIgnoreCase("home")){
-            carouselHeight = 500;
+            carouselHeight = 700;
             List<Category> categoryList = categoryService.getCategoriesById(-1, true, false, true);
-            System.out.println(categoryList.size());
             modelMap.addAttribute("categories", categoryList);
             modelMap.addAttribute("carouselType", "HOME_SLIDE");
             carouselImages = productService.getImageByType("HOME_SLIDE");
@@ -101,6 +104,7 @@ public class FurnitureController extends  AbstractController{
             }
         }
         modelMap.addAttribute("categoriesForMenu", categoriesForMenu);
+        modelMap.addAttribute("businessShowList", businessShowService.getActiveBusinessShow(3));
 
         Cookie userCookie = getCookie(request, "USER_ID");
         if(userCookie != null && userCookie.getValue() != null){
